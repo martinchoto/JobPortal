@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Job_Portal.Pages
+namespace Job_Portal.Pages.Home
 {
     public class IndexModel : PageModel
     {

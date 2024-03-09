@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Job-Portal\\Job-Portal\\Job-Portal.csproj": {}
+    "D:\\Job-Portal\\Job-Portal.csproj": {}
   },
   "projects": {
-    "D:\\Job-Portal\\Job-Portal\\Job-Portal.csproj": {
+    "D:\\Job-Portal\\Job-Portal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Job-Portal\\Job-Portal\\Job-Portal.csproj",
+        "projectUniqueName": "D:\\Job-Portal\\Job-Portal.csproj",
         "projectName": "Job-Portal",
-        "projectPath": "D:\\Job-Portal\\Job-Portal\\Job-Portal.csproj",
+        "projectPath": "D:\\Job-Portal\\Job-Portal.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "D:\\Job-Portal\\Job-Portal\\obj\\",
+        "outputPath": "D:\\Job-Portal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
