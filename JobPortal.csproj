@@ -5,7 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Job_Portal-3a9a5e85-d8d1-4e6f-b58d-cf499746be2e</UserSecretsId>
-    <RootNamespace>Job_Portal</RootNamespace>
+    <RootNamespace>JobPortal</RootNamespace>
+    <AssemblyName>JobPortal</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
