@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobPortal.Core.Data.Models
+namespace JobPortal.Core.Data
 {
-    public class Job
+    internal class DataConstants
     {
     }
 }

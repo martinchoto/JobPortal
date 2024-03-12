@@ -10,5 +10,12 @@ namespace Job_Portal.Data
         {
             Database.Migrate();
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseLazyLoadingProxies(true);
+        }
     }
 }
