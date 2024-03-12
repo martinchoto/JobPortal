@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using JobPortal.Core.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Job_Portal.Data
@@ -10,7 +11,8 @@ namespace Job_Portal.Data
         {
             Database.Migrate();
         }
-
+        public DbSet<JobOffer> JobOffers { get; set; } = null!;
+        public DbSet<Company> Companies { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

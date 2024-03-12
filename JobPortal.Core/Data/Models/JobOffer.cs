@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobPortal.Core.Data.Models
 {
-    public class JobOffer
+	public class JobOffer
     {
         [Key]
         public int Id { get; set; }
@@ -20,7 +16,8 @@ namespace JobPortal.Core.Data.Models
         public decimal Salary { get; set; }
         [Required]
         public string Location { get; set; } = null!;
+        [ForeignKey(nameof(Company))]
         public int CompanyId { get; set; }
-        public Company Company { get; set; } = null!;
+        public virtual Company Company { get; set; } = null!;
     }
 }

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Models\" />
+    <ProjectReference Include="..\JobPortal.Core\JobPortal.Core.csproj" />
   </ItemGroup>
 
 </Project>
