@@ -38,8 +38,7 @@ namespace Job_Portal.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -77,7 +76,7 @@ namespace Job_Portal.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, 
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, 
                     Input.Password, 
                     Input.RememberMe, 
                     lockoutOnFailure: false);

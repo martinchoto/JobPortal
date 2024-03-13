@@ -16,8 +16,5 @@ namespace JobPortal.Core.Data.Models
         public decimal Salary { get; set; }
         [Required]
         public string Location { get; set; } = null!;
-        [ForeignKey(nameof(Company))]
-        public int CompanyId { get; set; }
-        public virtual Company Company { get; set; } = null!;
     }
 }

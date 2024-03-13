@@ -6,7 +6,13 @@ namespace JobPortal.Controllers
     [Authorize]
     public class CompanyController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(int id)
         {
             return View();
         }
