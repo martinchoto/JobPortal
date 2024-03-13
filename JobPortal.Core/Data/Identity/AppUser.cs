@@ -9,5 +9,6 @@ namespace JobPortal.Core.Data.Identity
 {
 	public class AppUser : IdentityUser
 	{
+
 	}
 }
