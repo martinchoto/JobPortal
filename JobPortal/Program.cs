@@ -1,5 +1,6 @@
 using Job_Portal.Data;
 using JobPortal.Core.Data.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-})
+}).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<JobPortalDbContext>();
 builder.Services.AddRazorPages();
 
@@ -33,7 +34,17 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+using var scope = app.Services.CreateScope();
+var serviceProvider = scope.ServiceProvider;
+var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+foreach (var roleName in new[] { "Admin", "Company", "Applicant" })
+{
+    if (!await roleManager.RoleExistsAsync(roleName))
+    {
+        await roleManager.CreateAsync(new IdentityRole(roleName));
+    }
+}
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

@@ -1,6 +1,6 @@
 ﻿@page
 @using JobPortal.Areas.Identity.Pages.Account
-@model RegisterModel
+@model RegisterCompany
 @{
     ViewData["Title"] = "Register";
 }
@@ -13,32 +13,42 @@
             <h2>Add your company</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Username"></label>
                 <span asp-validation-for="Input.Username" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.CompanyName" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.CompanyName"></label>
                 <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Address" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Address"></label>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Location" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Location"></label>
+                <span asp-validation-for="Input.Location" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LogoUrl" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.LogoUrl"></label>
+                <span asp-validation-for="Input.LogoUrl" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
