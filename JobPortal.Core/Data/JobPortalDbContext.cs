@@ -13,8 +13,6 @@ namespace Job_Portal.Data
 			: base(options)
 		{
 		}
-		public DbSet<Applicant> Applicants { get; set; } = null!;
-		public DbSet<Company> Companies { get; set; } = null!;
 		public DbSet<JobOffer> JobOffers { get; set; } = null!;
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
