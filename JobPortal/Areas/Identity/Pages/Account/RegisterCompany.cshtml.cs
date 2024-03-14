@@ -1,10 +1,24 @@
-﻿using JobPortal.Core.Data.Identity;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+#nullable disable
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
+using JobPortal.Core.Data.Identity;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace JobPortal.Areas.Identity.Pages.Account
 {
@@ -15,6 +29,7 @@ namespace JobPortal.Areas.Identity.Pages.Account
         private readonly IUserStore<AppUser> _userStore;
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterCompany> _logger;
+        private readonly IEmailSender _emailSender;
 
         public RegisterCompany(
             UserManager<AppUser> userManager,
@@ -29,13 +44,23 @@ namespace JobPortal.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public class InputModel
         {
             [Required]
@@ -72,18 +97,15 @@ namespace JobPortal.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = "";
-                user.LastName = "";
                 user.CompanyName = Input.CompanyName;
                 user.Address = Input.Address;
                 user.Location = Input.Location;
@@ -96,7 +118,9 @@ namespace JobPortal.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
                     await _userManager.AddToRoleAsync(user, "Company");
+
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

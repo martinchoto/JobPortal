@@ -17,7 +17,8 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-}).AddRoles<IdentityRole>()
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<JobPortalDbContext>();
 builder.Services.AddRazorPages();
 

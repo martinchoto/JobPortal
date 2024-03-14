@@ -5,8 +5,8 @@ namespace JobPortal.Core.Data.Identity
 {
 	public class AppUser : IdentityUser
 	{
-		public string? FirstName { get; set; } = null!;
-		public string? LastName { get; set; } = null!;
+		public string? FirstName { get; set; }
+		public string? LastName { get; set; }
 
 		// for companies variant
 		public string? CompanyName { get; set; }
