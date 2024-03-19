@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JobPortal.Core.Data.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobPortal.Core.Data.Models
 {
-	public class JobOffer
+    public class JobOffer
     {
         [Key]
         public int Id { get; set; }
@@ -11,10 +12,9 @@ namespace JobPortal.Core.Data.Models
         public string Title { get; set; } = null!;
         [Required]
         public string Description { get; set; } = null!;
-        [Required]
-        public string Requirements { get; set; } = null!;
-        public decimal Salary { get; set; }
-        [Required]
-        public string Location { get; set; } = null!;
+        public DateTime PostedDate { get; set; }
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; }
+        public virtual AppUser User { get; set; }
     }
 }
