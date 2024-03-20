@@ -1,14 +1,13 @@
-﻿using JobPortal.Core;
+﻿using JobPortal.Core.Data;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Type = JobPortal.Core.Data.Models.Type;
 
 namespace Job_Portal.Data
 {
-	public class JobPortalDbContext : IdentityDbContext<AppUser>
+    public class JobPortalDbContext : IdentityDbContext<AppUser>
 	{
 		private readonly SeedData seedData;
 
@@ -31,7 +30,6 @@ namespace Job_Portal.Data
 
 			builder.Entity<Type>()
 				.HasData(seedData.SeedTypes());
-
 		}
 	}
 }

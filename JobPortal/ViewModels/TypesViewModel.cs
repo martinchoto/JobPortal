@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JobPortal.Core.Data.Models
+namespace JobPortal.ViewModels
 {
-	public class Type
+	public class TypesViewModel
 	{
 		[Key]
 		public int Id { get; set; }
 		[Required]
 		[StringLength(25)]
 		public string Name { get; set; } = null!;
-    }
+	}
 }

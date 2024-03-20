@@ -18,7 +18,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Company"))
+                        @if (User?.Identity?.IsAuthenticated ?? false && User.IsInRole("Company"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Company" asp-action="Add" asp-area="">Add Offer</a>
