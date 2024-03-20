@@ -1,10 +1,10 @@
 ﻿using JobPortal.Core.Data.Identity;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace JobPortal.Core.Data.Models
+namespace JobPortal.ViewModels.Company
 {
-    public class JobOffer
+    public class AddJobOfferViewModel
     {
         [Key]
         public int Id { get; set; }
@@ -12,8 +12,8 @@ namespace JobPortal.Core.Data.Models
         [StringLength(50)]
         public string Position { get; set; } = null!;
         [Required]
-		[StringLength(50)]
-		public string Status { get; set; } = null!;
+        [StringLength(50)]
+        public string Status { get; set; } = null!;
         [Required]
         public string Description { get; set; } = null!;
         public decimal Salary { get; set; }
@@ -21,13 +21,9 @@ namespace JobPortal.Core.Data.Models
         [Required]
         [StringLength(50)]
         public string Bonus { get; set; } = null!;
-        public DateTime PostedDate { get; set; }
-        [ForeignKey(nameof(Company))]
         [Required]
-        public string CompanyId { get; set; } = null!;
-        public virtual AppUser Company { get; set; } = null!;
-        [ForeignKey(nameof(Type))]
+        public string UserId { get; set; } = null!;
         public int TypeId { get; set; }
-        public virtual Type Type { get; set; } = null!;
+        public List<TypesViewModel> Types { get; set; } = new List<TypesViewModel>();
     }
 }

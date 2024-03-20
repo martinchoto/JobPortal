@@ -1,7 +1,8 @@
 ﻿using Job_Portal.Data;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
-using JobPortal.ViewModels;
+using JobPortal.Services.Company;
+using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,65 +16,71 @@ namespace JobPortal.Controllers
 	[Authorize(Roles = "Company")]
 	public class CompanyController : Controller
 	{
-		private readonly JobPortalDbContext context;
-		public CompanyController(JobPortalDbContext _context)
+		private readonly ICompanyService _companyService;
+		private readonly JobPortalDbContext _dbContext;
+
+		public CompanyController(ICompanyService companyService, JobPortalDbContext data)
 		{
-			context = _context;
+			_companyService = companyService;
+			_dbContext = data;
 		}
+
 		public async Task<IActionResult> All()
 		{
-			var offers = await context
-				.JobOffers
-				.Where(x  => x.UserId == GetUserId())
-				.Select(x => new AllMyJobOffers
-				{
-					Id = x.Id,
-					Status = x.Status,
-					VacationDays = x.VacationDays,
-					Position = x.Position,
-					Salary = x.Salary.ToString("0.##"),
-				}).ToListAsync();
+			var offers = await _companyService.GetAllJobOffersForCompanyAsync(GetUserId());
 			return View(offers);
 		}
+
 		[HttpGet]
-		public IActionResult Add()
+		public async Task<IActionResult> Add()
 		{
-			AddJobOfferViewModel viewModel = new AddJobOfferViewModel()
+			var viewModel = new AddJobOfferViewModel
 			{
-				Types = GetTypes()
+				Types = await _companyService.GetTypes()
 			};
 			return View(viewModel);
 		}
+
 		[HttpPost]
 		public async Task<IActionResult> Add(AddJobOfferViewModel viewModel)
 		{
-			JobOffer jobOffer = new JobOffer()
-			{
-				Position = viewModel.Position,
-				Status = viewModel.Status,
-				Description = viewModel.Description,
-				Bonus = viewModel.Bonus,
-				Salary = viewModel.Salary,
-				VacationDays = viewModel.VacationDays,
-				TypeId = viewModel.TypeId,
-				UserId = GetUserId(),
-				PostedDate = DateTime.UtcNow
-			};
-
-			await context.JobOffers.AddAsync(jobOffer);
-			await context.SaveChangesAsync();
+			await _companyService.AddJobOfferAsync(viewModel, GetUserId());
 			return RedirectToAction(nameof(All), "Company");
 		}
-		public List<TypesViewModel> GetTypes()
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
 		{
-			return context.Types
-				.Select(x => new TypesViewModel
-				{
-					Id = x.Id,
-					Name = x.Name,
-				})
-				.ToList();
+			var edited = await _companyService.GetOffer(id);
+			if (edited == null)
+			{
+				return BadRequest();
+			}
+			if (edited.CompanyId != GetUserId())
+			{
+				return Unauthorized();
+			}
+
+			AddJobOfferViewModel viewModel = await _companyService.BuildEditViewModel(id);
+			return View(viewModel);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit(AddJobOfferViewModel viewModel, int id)
+		{
+			var edited = await _companyService.GetOffer(id);
+			if (edited == null)
+			{
+				return BadRequest();
+			}
+			if (edited.CompanyId != GetUserId())
+			{
+				return Unauthorized();
+			}
+
+			await _companyService.EditJobOfferAsync(viewModel, id, GetUserId());
+
+			return RedirectToAction(nameof(All), "Company");
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
 }
+
