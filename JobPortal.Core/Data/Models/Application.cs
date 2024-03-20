@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace JobPortal.Core.Data.Models
 {
     public class Application
-    {
+    { 
         [Key] 
         public int Id { get; set; }
         [Required]
