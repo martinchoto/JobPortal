@@ -1,58 +1,64 @@
-﻿@model AddJobOfferViewModel
-@using JobPortal.ViewModels
+﻿@using JobPortal.ViewModels
+@model AddJobOfferViewModel
+@{
+	ViewData["Title"] = "Add Job Offer";
+}
 
-<h2 class="text-center">Add Job Offer</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
 <div class="row">
-    <div class="col-md-4 mx-auto text-center">
-		<form asp-action ="Add" method="post">
-            <div class="mb-3">
-                <label asp-for="@Model.Position" class="mb-3">Position</label>
-				<input asp-for ="@Model.Position" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.Position" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Status" class="mb-3">Status</label>
-                <input asp-for="@Model.Status" class="form-control" aria-required="true" asp-for="Status" />
-                <span asp-validation-for="@Model.Status" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Description" class="mb-3">Description</label>
-                <textarea asp-for="@Model.Description" rows="4" class="form-control" style="resize: none;" aria-required="true" asp-for="Description"></textarea>
-                <span asp-validation-for="@Model.Description" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Salary" class="mb-3">Salary</label>
-                <input asp-for="@Model.Salary" class="form-control" aria-required="true" asp-for="Salary" />
-                <span asp-validation-for ="@Model.Salary" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.VacationDays" class="mb-3">Vacation</label>
-                <input asp-for="@Model.VacationDays" class="form-control" aria-required="true" asp-for="VacationDays" />
-                <span asp-validation-for="@Model.VacationDays" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Bonus" class="mb-3">Bonus</label>
-                <input asp-for="@Model.Bonus" class="form-control" aria-required="true" asp-for="Bonus" />
-                <span asp-validation-for="@Model.Bonus" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.TypeId" class="form-label-add-edit">Select Type</label>
-                <select asp-for="@Model.TypeId" class="form-control">
-                    <option disabled selected value="">Select Type...</option>
-                    @foreach (var type in Model.Types)
-                    {
-                        <option value="@type.Id">@type.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.TypeId" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary px-5 py-3 rounded-2 border border-info">
-                    Submit
-                </button>
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4 mx-auto text-center">
+		<form asp-action="Add" method="post">
+			<div class="mb-3">
+				<label asp-for="@Model.Position" class="mb-3">Position</label>
+				<input asp-for="@Model.Position" class="form-control" aria-required="true" />
+				<span asp-validation-for="@Model.Position" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Status" class="mb-3">Status</label>
+				<input asp-for="@Model.Status" class="form-control" aria-required="true" asp-for="Status" />
+				<span asp-validation-for="@Model.Status" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Description" class="mb-3">Description</label>
+				<textarea asp-for="@Model.Description" rows="4" class="form-control" style="resize: none;" aria-required="true" asp-for="Description"></textarea>
+				<span asp-validation-for="@Model.Description" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Salary" class="mb-3">Salary</label>
+				<input asp-for="@Model.Salary" class="form-control" aria-required="true" asp-for="Salary" />
+				<span asp-validation-for="@Model.Salary" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.VacationDays" class="mb-3">Vacation</label>
+				<input asp-for="@Model.VacationDays" class="form-control" aria-required="true" asp-for="VacationDays" />
+				<span asp-validation-for="@Model.VacationDays" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Bonus" class="mb-3">Bonus</label>
+				<input asp-for="@Model.Bonus" class="form-control" aria-required="true" asp-for="Bonus" />
+				<span asp-validation-for="@Model.Bonus" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.TypeId" class="form-label-add-edit">Select Type</label>
+				<select asp-for="@Model.TypeId" class="form-control">
+					<option disabled selected value="">Select Type...</option>
+					@foreach (var type in Model.Types)
+					{
+						<option value="@type.Id">@type.Name</option>
+					}
+				</select>
+				<span asp-validation-for="@Model.TypeId" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary px-5 py-3 rounded-2 border border-info">
+					Submit
+				</button>
+			</div>
+		</form>
+	</div>
 </div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -20,9 +20,20 @@ namespace JobPortal.Controllers
 		{
 			context = _context;
 		}
-		public async Task<IActionResult> MyJobOffers()
+		public async Task<IActionResult> All()
 		{
-			return Ok();
+			var offers = await context
+				.JobOffers
+				.Where(x  => x.UserId == GetUserId())
+				.Select(x => new AllMyJobOffers
+				{
+					Id = x.Id,
+					Status = x.Status,
+					VacationDays = x.VacationDays,
+					Position = x.Position,
+					Salary = x.Salary.ToString("0.##"),
+				}).ToListAsync();
+			return View(offers);
 		}
 		[HttpGet]
 		public IActionResult Add()
@@ -51,7 +62,7 @@ namespace JobPortal.Controllers
 
 			await context.JobOffers.AddAsync(jobOffer);
 			await context.SaveChangesAsync();
-			return RedirectToAction(nameof(MyJobOffers), "Company");
+			return RedirectToAction(nameof(All), "Company");
 		}
 		public List<TypesViewModel> GetTypes()
 		{

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobPortal", "JobPortal.csproj", "{4070295D-B036-4916-8E76-3A60CE68BE5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobPortal.Core", "..\JobPortal.Core\JobPortal.Core.csproj", "{2F1677EA-F820-4011-94EA-C80FE2B0EF0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobPortal.Data", "..\JobPortal.Core\JobPortal.Data.csproj", "{2F1677EA-F820-4011-94EA-C80FE2B0EF0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
-﻿using JobPortal.Core.Data;
-using JobPortal.Core.Data.Identity;
+﻿using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
+using JobPortal.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Type = JobPortal.Core.Data.Models.Type;
