@@ -1,28 +1,19 @@
-﻿using Job_Portal.Data;
-using JobPortal.Core.Data.Identity;
-using JobPortal.Core.Data.Models;
-using JobPortal.Services.Company;
+﻿using JobPortal.Services.Company;
 using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using System.Xml.Linq;
 
 namespace JobPortal.Controllers
 {
-	[Authorize(Roles = "Company")]
+    [Authorize(Roles = "Company")]
 	public class CompanyController : Controller
 	{
 		private readonly ICompanyService _companyService;
-		private readonly JobPortalDbContext _dbContext;
 
-		public CompanyController(ICompanyService companyService, JobPortalDbContext data)
+		public CompanyController(ICompanyService companyService)
 		{
 			_companyService = companyService;
-			_dbContext = data;
 		}
 
 		public async Task<IActionResult> All()
@@ -75,10 +66,28 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
-
 			await _companyService.EditJobOfferAsync(viewModel, id, GetUserId());
 
 			return RedirectToAction(nameof(All), "Company");
+		}
+		public async Task<IActionResult> Delete(int id)
+		{
+			var offer = await _companyService.GetOffer(id);
+			if (offer == null)
+			{
+				return BadRequest();
+			}
+			if (offer.CompanyId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			DeleteViewModel delViewModel = new DeleteViewModel()
+			{
+				Position = offer.Position,
+				Salary = offer.Salary.ToString("0.##"),
+				LastUpdated = offer.PostedDate.ToString("yyyy-MM-dd")
+			};
+			return View(delViewModel);
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
