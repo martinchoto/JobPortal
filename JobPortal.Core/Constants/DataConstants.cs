@@ -8,5 +8,7 @@ namespace JobPortal.Core.Constants
 {
     public class DataConstants
     {
-    }
+        public const string DECIMAL_FORMAT = "0.##";
+
+	}
 }

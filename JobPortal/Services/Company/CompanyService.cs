@@ -1,4 +1,5 @@
 ﻿using Job_Portal.Data;
+using JobPortal.Core.Constants;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace JobPortal.Services.Company
 					Status = x.Status,
 					VacationDays = x.VacationDays,
 					Position = x.Position,
-					Salary = x.Salary.ToString("0.##"),
+					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
 				})
 				.ToListAsync();
 		}
@@ -94,5 +95,11 @@ namespace JobPortal.Services.Company
 
 			await _context.SaveChangesAsync();
 		}
-	}
+
+        public async Task DeleteJobOffer(JobOffer jobOffer)
+        {
+			_context.JobOffers.Remove(jobOffer);
+			await _context.SaveChangesAsync();
+        }
+    }
 }

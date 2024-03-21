@@ -1,7 +1,9 @@
-﻿using JobPortal.Services.Company;
+﻿using JobPortal.Core.Constants;
+using JobPortal.Services.Company;
 using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 using System.Security.Claims;
 
 namespace JobPortal.Controllers
@@ -83,11 +85,26 @@ namespace JobPortal.Controllers
 			}
 			DeleteViewModel delViewModel = new DeleteViewModel()
 			{
+				Id = offer.Id,
 				Position = offer.Position,
-				Salary = offer.Salary.ToString("0.##"),
+				Salary = offer.Salary.ToString(DataConstants.DECIMAL_FORMAT),
 				LastUpdated = offer.PostedDate.ToString("yyyy-MM-dd")
 			};
 			return View(delViewModel);
+		}
+		public async Task<IActionResult> ConfirmDelete(int id)
+		{
+            var offer = await _companyService.GetOffer(id);
+            if (offer == null)
+            {
+                return BadRequest();
+            }
+            if (offer.CompanyId != GetUserId())
+            {
+                return Unauthorized();
+            }
+			await _companyService.DeleteJobOffer(offer);
+            return RedirectToAction(nameof(All), "Company");
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}

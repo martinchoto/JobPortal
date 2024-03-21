@@ -13,5 +13,6 @@ namespace JobPortal.Services.Company
 		Task<JobOffer> GetOffer(int id);
 		Task<AddJobOfferViewModel> BuildEditViewModel(int id);
 		Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id, string companyId);
+		Task DeleteJobOffer(JobOffer jobOffer);
 	}
 }

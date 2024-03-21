@@ -1,0 +1,22 @@
+﻿@using JobPortal.ViewModels.Job
+@model List<AllJobsViewModel>
+@{
+	ViewData["Title"] = "All offers";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<div class="text-center row">
+	@foreach (var e in Model)
+	{
+		<div class="card col-2 g-3 mx-3" style="width: 25rem; ">
+			<div class="card-body">
+				<img style="width: 15rem;" src="@e.ImageUrl" />
+				<h4 class="card-title mt-1 fw-bold">@e.Position</h4>
+				<h5 class="card-title mt-1">Status: @e.Status</h5>
+				<h5 class="card-title mt-1">Salary: @e.Salary leva</h5>
+				<h5 class="card-title mt-1">Vacation Days: @e.VacationDays per year</h5>
+				<a asp-controller="Job" asp-action="Details" asp-route-id="@e.Id" class="btn btn-secondary mb-2 w-100 p-3 fw-bold">Details</a>
+			</div>
+		</div>
+	}
+</div>

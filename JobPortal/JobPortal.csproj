@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JobPortal.Core\JobPortal.Data.csproj" />
+    <ProjectReference Include="..\JobPortal.Core\JobPortal.Core.csproj" />
   </ItemGroup>
 
 </Project>

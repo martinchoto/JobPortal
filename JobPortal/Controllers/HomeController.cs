@@ -6,7 +6,7 @@ namespace Job_Portal.Controllers
 	{
 		public IActionResult Index()
 		{
-			if (User?.Identity?.IsAuthenticated ?? true && User?.Identity != null && User.IsInRole("Company"))
+			if (User.Identity.IsAuthenticated && User?.Identity != null && User.IsInRole("Company"))
 			{
 				return RedirectToAction("All", "Company");
 			}
