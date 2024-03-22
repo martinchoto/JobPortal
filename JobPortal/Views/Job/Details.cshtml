@@ -12,10 +12,10 @@
 <img class="mx-auto d-block" style="width: 20rem;" src="@Model.ImageUrl" />
 <div class="text-center row">
 	<div class="col">
-		<label>Status</label>
-		<p>@Model.Status</p>
 		<label>Position</label>
 		<p>@Model.Position</p>
+		<label>Status</label>
+		<p>@Model.Status</p>
 		<label>Salary</label>
 		<p>@Model.Salary leva</p>
 		<label>Bonus</label>
@@ -30,14 +30,14 @@
 			}
 			else if (User.IsInRole("Applicant"))
 			{
-				<a asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Id" class="btn btn-secondary w-75 mb-2 p-3 fw-bold">Apply</a>
+				<a asp-controller="Application" asp-action="Apply" asp-route-id="@Model.Id" class="btn btn-secondary w-75 mb-2 p-3 fw-bold">Apply</a>
 			}
 		</div>
 	</div>
 	<div class="col">
 		<label>Description</label>
 		<p>@Model.Description</p>
-		<label>LastUpdatedOn:</label>
+		<label>Last Updated On</label>
 		<p>@Model.LastUpdatedOn</p>
 		<label>Company Name</label>
 		<p>@Model.CompanyName</p>

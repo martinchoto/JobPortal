@@ -3,6 +3,7 @@ using JobPortal.Core.Constants;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Job;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace JobPortal.Services.Job
 {
@@ -45,7 +46,7 @@ namespace JobPortal.Services.Job
 				Address = job.Company.Address,
 				CompanyName = job.Company.CompanyName,
 				Description = job.Description,
-				LastUpdatedOn = job.PostedDate.ToString("dd/MM/yyyy")
+				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)
 			};
 			return jobViewModel;
 		}

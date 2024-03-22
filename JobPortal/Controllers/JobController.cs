@@ -2,10 +2,12 @@
 using JobPortal.Core.Constants;
 using JobPortal.Services.Job;
 using JobPortal.ViewModels.Job;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobPortal.Controllers
 {
+	[Authorize]
 	public class JobController : Controller
 	{
 		private readonly IJobService _jobService;
