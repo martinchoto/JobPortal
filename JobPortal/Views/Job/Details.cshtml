@@ -1,17 +1,52 @@
-﻿
+﻿@using JobPortal.Core.Data.Identity
+@using JobPortal.ViewModels.Job
+@inject UserManager<AppUser> UserManager
+@model JobDetailsViewModel
 @{
 	ViewData["Title"] = "Job Details";
+	var user = await UserManager.GetUserAsync(User);
 }
+
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
-<div>
-	<img  style = "width: 15rem;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png" />
+<img class="mx-auto d-block" style="width: 20rem;" src="@Model.ImageUrl" />
+<div class="text-center row">
 	<div class="col">
-		<p>asdsad</p>
-		<p>asdsad</p>
-		<p>asdsad</p>
-		<p>asdsad</p>
-		<p>asdsad</p>
+		<label>Status</label>
+		<p>@Model.Status</p>
+		<label>Position</label>
+		<p>@Model.Position</p>
+		<label>Salary</label>
+		<p>@Model.Salary</p>
+		<label>Bonus</label>
+		<p>@Model.Bonus</p>
+		<label>Vacation Days</label>
+		<p>@Model.VacationDays</p>
+		<div class="text-center">
+			@if (user.CompanyName == Model.CompanyName && User.IsInRole("Company"))
+			{
+				<a asp-controller="Company" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-75 p-3 fw-bold">Edit</a>
+				<a asp-controller="Company" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-75 p-3 fw-bold">Delete</a>
+			}
+			else if (User.IsInRole("Applicant"))
+			{
+				<a asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Id" class="btn btn-secondary w-75 mb-2 p-3 fw-bold">Apply</a>
+			}
+		</div>
 	</div>
 	<div class="col">
+		<label>Description</label>
+		<p>@Model.Description</p>
+		<label>LastUpdatedOn:</label>
+		<p>@Model.LastUpdatedOn</p>
+		<label>Company Name</label>
+		<p>@Model.CompanyName</p>
+		<label>Company Email</label>
+		<p>@Model.Email</p>
+		<label>Location</label>
+		<p>@Model.Location</p>
+		<label>Address</label>
+		<p>@Model.Address</p>
+	</div>
 </div>
+

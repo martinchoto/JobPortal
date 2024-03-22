@@ -44,7 +44,7 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> Edit(int id)
 		{
 			var edited = await _companyService.GetOffer(id);
-			if (edited == null)
+			if (edited == null || !User.IsInRole("Company"))
 			{
 				return BadRequest();
 			}
@@ -60,7 +60,7 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> Edit(AddJobOfferViewModel viewModel, int id)
 		{
 			var edited = await _companyService.GetOffer(id);
-			if (edited == null)
+			if (edited == null || !User.IsInRole("Company"))
 			{
 				return BadRequest();
 			}
@@ -75,7 +75,7 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> Delete(int id)
 		{
 			var offer = await _companyService.GetOffer(id);
-			if (offer == null)
+			if (offer == null || !User.IsInRole("Company"))
 			{
 				return BadRequest();
 			}
@@ -95,7 +95,7 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> ConfirmDelete(int id)
 		{
             var offer = await _companyService.GetOffer(id);
-            if (offer == null)
+            if (offer == null || !User.IsInRole("Company"))
             {
                 return BadRequest();
             }

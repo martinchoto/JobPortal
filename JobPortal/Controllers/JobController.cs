@@ -29,7 +29,29 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> Details(int id)
 		{
-			return View();
+			var job = await jobPortalDbContext.JobOffers
+				.FindAsync(id);
+			if (job == null)
+			{
+				return BadRequest();
+			}
+			var jobViewModel = new JobDetailsViewModel
+			{
+				Id = job.Id,
+				Status = job.Status,
+				Position = job.Position,
+				Salary = job.Salary.ToString(DataConstants.DECIMAL_FORMAT),
+				VacationDays = job.VacationDays,
+				Bonus = job.Bonus,
+				Location = job.Company.Location,
+				Email = job.Company.Email,
+				ImageUrl = job.Company.LogoUrl,
+				Address = job.Company.Address,
+				CompanyName = job.Company.CompanyName,
+				Description = job.Description,
+				LastUpdatedOn = job.PostedDate.ToString("dd/MM/yyyy")
+			};
+			return View(jobViewModel);
 		}
 	}
 }
