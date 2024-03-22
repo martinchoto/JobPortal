@@ -2,6 +2,7 @@ using JobPortal.Services.Company;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Job_Portal.Data;
+using JobPortal.Services.Job;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IJobService, JobService>();
 
 var app = builder.Build();
 
