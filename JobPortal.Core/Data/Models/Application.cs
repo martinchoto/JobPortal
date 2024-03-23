@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using JobPortal.Core.Data.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobPortal.Core.Data.Models
 {
-    public class Application
+	public class Application
     { 
         [Key] 
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; } = null!;
+        public string ApplicationName { get; set; } = null!;
+        public DateTime CreatedOn {  get; set; }
+        [Required]
+        public string FullName { get; set; } = null!;
         [Required]
         public string Description { get; set; } = null!;
-
+        [Required]
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; } = null!;
+        public virtual AppUser User { get; set; } = null!;
+        [ForeignKey(nameof(JobOffer))]
+        public int JobOfferId { get; set; }
+        public virtual JobOffer JobOffer { get; set; } = null!;
     }
 }

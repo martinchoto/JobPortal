@@ -32,6 +32,12 @@
 									<a class="nav-link text-dark" asp-controller="Company" asp-action="Add" asp-area="">Add Offer</a>
 								</li>
 							}
+							else if (User.IsInRole("Applicant"))
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Application" asp-action="Create" asp-area="">Create application</a>
+								</li>
+							}
 						}
 
 					</ul>

@@ -1,7 +1,4 @@
 using JobPortal.Services.Company;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Job_Portal.Data;
 using JobPortal.Services.Job;
 
 var builder = WebApplication.CreateBuilder(args);
