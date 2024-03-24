@@ -29,5 +29,6 @@ namespace JobPortal.Core.Data.Models
         [ForeignKey(nameof(Type))]
         public int TypeId { get; set; }
         public virtual Type Type { get; set; } = null!;
-    }
+        public virtual List<JobOfferApplication> JobOfferApplications { get; set; } = new List<JobOfferApplication>();
+	}
 }

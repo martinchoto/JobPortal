@@ -16,13 +16,16 @@ namespace Job_Portal.Data
 		{
 			seedData = new SeedData();
 		}
+		public DbSet<Company> Companies { get; set; } = null!;
 		public DbSet<JobOffer> JobOffers { get; set; } = null!;
 		public DbSet<Type> Types { get; set; } = null!;
+		public DbSet<Application> Applications { get; set; } = null!;
+		public DbSet<JobOfferApplication> JobOffersApplications { get; set; } = null!;
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			base.OnConfiguring(optionsBuilder);
 
-			optionsBuilder.UseLazyLoadingProxies(true);
+			optionsBuilder.UseLazyLoadingProxies();
 		}
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -30,6 +33,21 @@ namespace Job_Portal.Data
 
 			builder.Entity<Type>()
 				.HasData(seedData.SeedTypes());
+
+			builder.Entity<JobOfferApplication>()
+				.HasKey(pk => new {pk.JobOfferId, pk.ApplicationId});
+
+			builder.Entity<JobOfferApplication>()
+				.HasOne(jo => jo.JobOffer)
+				.WithMany(jo => jo.JobOfferApplications)
+				.HasForeignKey(fk => fk.JobOfferId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<JobOfferApplication>()
+				.HasOne(a => a.Application)
+				.WithMany(jo => jo.JobOfferApplications)
+				.HasForeignKey(fk => fk.ApplicationId)
+				.OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }

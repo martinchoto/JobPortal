@@ -9,18 +9,18 @@ namespace JobPortal.Core.Data.Models
         [Key] 
         public int Id { get; set; }
         [Required]
-        public string ApplicationName { get; set; } = null!;
-        public DateTime CreatedOn {  get; set; }
+        public string Name { get; set; } = null!;
+        public DateTime CreatedOn { get; set; }
         [Required]
         public string FullName { get; set; } = null!;
+        [Required]
+        public string Email { get; set; } = null!;
         [Required]
         public string Description { get; set; } = null!;
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
         public virtual AppUser User { get; set; } = null!;
-        [ForeignKey(nameof(JobOffer))]
-        public int JobOfferId { get; set; }
-        public virtual JobOffer JobOffer { get; set; } = null!;
+        public virtual List<JobOfferApplication> JobOfferApplications { get; set; } = new List<JobOfferApplication>();
     }
 }

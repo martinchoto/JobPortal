@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using JobPortal.Core.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.Core.Data.Identity
@@ -7,6 +8,7 @@ namespace JobPortal.Core.Data.Identity
 	{
 		public string? FirstName { get; set; }
 		public string? LastName { get; set; }
+		public virtual List<Application> Applications { get; set; } = new List<Application>();
 
 		// for companies variant
 		public string? CompanyName { get; set; }
