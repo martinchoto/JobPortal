@@ -1,3 +1,4 @@
+using JobPortal.Extensions;
 using JobPortal.Services.Company;
 using JobPortal.Services.Job;
 

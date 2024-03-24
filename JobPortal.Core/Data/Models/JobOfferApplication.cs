@@ -11,6 +11,6 @@ namespace JobPortal.Core.Data.Models
 		public int JobOfferId { get; set; }
 		public virtual JobOffer JobOffer { get; set; } = null!;
 		public int ApplicationId { get; set; }
-		public virtual Application Application { get; set; } = null!;
+		public virtual JobApplication Application { get; set; } = null!;
 	}
 }

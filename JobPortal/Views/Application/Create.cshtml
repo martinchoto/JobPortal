@@ -1,5 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+	ViewData["Title"] = "Create Application";
 }
+<div class="text-center ">
+	<h2 class="class= mb-3">@ViewData["Title"]</h2>
+	<hr />
+	<form>
+		<div class="row col-md-4 mx-auto text-center">
+			<label>Name of the application</label>
+			<input class="mb-3" type="text" />
+			<label>Full Name</label>
+			<input class="mb-3" type="text" />
+			<label>Email</label>
+			<input class="mb-3" type="email" />
+			<label>Description about you</label>
+			<textarea class="mb-3" style="resize: none; height: 35vh;" placeholder="Ex. previous work, education and etc."></textarea>
+			<label>Why do you want to work for this job?</label>
+			<textarea class="mb-3" style="resize: none; height: 20vh;"></textarea>
+			<button type="submit" class="btn btn-info mb-2 w-100 p-3 fw-bold">Submit</button>
+		</div>
+	</form>
+</div>

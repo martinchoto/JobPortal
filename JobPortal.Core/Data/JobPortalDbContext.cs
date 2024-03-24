@@ -19,7 +19,7 @@ namespace Job_Portal.Data
 		public DbSet<Company> Companies { get; set; } = null!;
 		public DbSet<JobOffer> JobOffers { get; set; } = null!;
 		public DbSet<Type> Types { get; set; } = null!;
-		public DbSet<Application> Applications { get; set; } = null!;
+		public DbSet<JobApplication> Applications { get; set; } = null!;
 		public DbSet<JobOfferApplication> JobOffersApplications { get; set; } = null!;
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

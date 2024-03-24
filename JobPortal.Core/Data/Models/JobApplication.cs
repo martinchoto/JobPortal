@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobPortal.Core.Data.Models
 {
-	public class Application
+	public class JobApplication
     { 
         [Key] 
         public int Id { get; set; }
@@ -17,6 +17,8 @@ namespace JobPortal.Core.Data.Models
         public string Email { get; set; } = null!;
         [Required]
         public string Description { get; set; } = null!;
+        [Required]
+        public string Reason { get; set; } = null!;
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;

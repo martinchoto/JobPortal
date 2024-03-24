@@ -3,7 +3,7 @@ using JobPortal.Core.Data.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace JobPortal.Extensions
 {
 	public static class ServiceCollectionExtension
 	{
