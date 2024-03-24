@@ -1,12 +1,25 @@
 ﻿@model IndexModel
 @{
-    ViewData["Title"] = "Job Portal";
+	ViewData["Title"] = "Job Portal";
 }
 
 <div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <hr />
-    <p>This is web application for finding jobs and companies</p>
-    <img class="rounded-3" 
-    src="https://t3.ftcdn.net/jpg/04/51/83/22/360_F_451832202_e1QKPBz6HJm25BlNZwi0OT1404WGMs1i.jpg" />
+	<h1 class="display-4">@ViewData["Title"]</h1>
+	<hr />
+	<p>This is web application for finding jobs and companies</p>
+	<img class="rounded-3 mb-4"
+		 src="https://t3.ftcdn.net/jpg/04/51/83/22/360_F_451832202_e1QKPBz6HJm25BlNZwi0OT1404WGMs1i.jpg" />
+	<p>Are you an applicant looking for a job or company looking for new hires</p>
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-2">
+			<form asp-area= "Identity" asp-page="/Account/RegisterApplicant">
+				<button class="btn btn-primary d-block mb-3 p-2">I'm looking for a job</button>
+			</form>
+		</div>
+		<div class="col-md-2">
+			<form asp-area="Identity" asp-page="/Account/RegisterCompany">
+				<button class="btn btn-primary d-block mb-3 p-2">I'm looking for a hire</button>
+			</form>
+		</div>
+	</div>
 </div>

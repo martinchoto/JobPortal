@@ -27,6 +27,7 @@ namespace JobPortal.Services.Company
 					VacationDays = x.VacationDays,
 					Position = x.Position,
 					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
+					Type = x.Type.Name
 				})
 				.ToListAsync();
 		}

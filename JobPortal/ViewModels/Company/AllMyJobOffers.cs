@@ -7,5 +7,6 @@
         public string Position { get; set; } = null!;
         public string Salary { get; set; } = null!;
         public int VacationDays { get; set; }
+        public string Type { get; set; } = null!;
     }
 }

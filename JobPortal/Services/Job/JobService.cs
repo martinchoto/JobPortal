@@ -24,7 +24,8 @@ namespace JobPortal.Services.Job
 					Status = x.Status,
 					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
 					VacationDays = x.VacationDays,
-					ImageUrl = x.Company.LogoUrl
+					ImageUrl = x.Company.LogoUrl,
+					Type = x.Type.Name
 				})
 				.ToListAsync();
 			return jobs;
@@ -46,7 +47,8 @@ namespace JobPortal.Services.Job
 				Address = job.Company.Address,
 				CompanyName = job.Company.CompanyName,
 				Description = job.Description,
-				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)
+				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
+				Type = job.Type.Name
 			};
 			return jobViewModel;
 		}

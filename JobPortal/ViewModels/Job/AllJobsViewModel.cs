@@ -8,5 +8,6 @@
 		public string Salary { get; set; } = null!;
 		public int VacationDays { get; set; }
 		public string ImageUrl { get; set; } = null!;
+		public string Type { get; set; } = null!;
 	}
 }
