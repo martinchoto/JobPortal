@@ -3,6 +3,7 @@ using JobPortal.Core.Constants;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Application;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace JobPortal.Services.Application
 {
@@ -28,6 +29,20 @@ namespace JobPortal.Services.Application
 
 			await _context.Applications.AddAsync(application);
 			await _context.SaveChangesAsync();
+		}
+
+		public async Task<List<MyJobApplicationViewModel>> GetApplicationAsync(string applicantId)
+		{
+			var myViewModel = await _context.Applications
+				.Where(x => x.UserId == applicantId)
+				.Select(x => new MyJobApplicationViewModel
+				{
+					Id = x.Id,
+					Name = x.Name,
+					CreatedOn = x.CreatedOn.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)
+				})
+				.ToListAsync();
+			return myViewModel;
 		}
 	}
 }

@@ -17,7 +17,8 @@ namespace JobPortal.Controllers
 
 		public async Task<IActionResult> Mine()
 		{
-			return View();
+			var result = await _applicationService.GetApplicationAsync(GetUserId());
+			return View(result);
 		}
 		[HttpGet]
 		public async Task<IActionResult> Create()
