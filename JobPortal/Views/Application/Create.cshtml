@@ -6,7 +6,7 @@
 <div class="text-center ">
 	<h2 class="class= mb-3">@ViewData["Title"]</h2>
 	<hr />
-	<form asp-controller="Application" asp-action="Create">
+	<form asp-controller="Application" method="post" asp-action="Create">
 		<div class="row col-md-4 mx-auto text-center">
 			<label asp-for="@Model.ApplicationName">@Model.ApplicationName</label>
 			<input asp-for="@Model.ApplicationName" class="mb-3 form-control" type="text" aria-required="true" />

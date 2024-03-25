@@ -82,7 +82,7 @@ namespace JobPortal.Services.Company
 				Bonus = edited.Bonus
 			};
 		}
-		public async Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id, string companyId)
+		public async Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id)
 		{
 			var toBeEdited = await GetOffer(id);
 			toBeEdited.Status = viewModel.Status;

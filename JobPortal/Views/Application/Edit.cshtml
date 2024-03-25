@@ -6,15 +6,15 @@
 <div class="text-center ">
 	<h2 class="class= mb-3">@ViewData["Title"]</h2>
 	<hr />
-	<form asp-controller="Application" asp-action="Create">
+	<form asp-controller="Application" method="post" asp-action="Edit">
 		<div class="row col-md-4 mx-auto text-center">
-			<label asp-for="@Model.ApplicationName">@Model.ApplicationName</label>
+			<label asp-for="@Model.ApplicationName">Application Name</label>
 			<input asp-for="@Model.ApplicationName" class="mb-3 form-control" type="text" aria-required="true" />
 			<span asp-validation-for="@Model.ApplicationName" class="text-danger"></span>
-			<label asp-for="@Model.FullName">@Model.FullName</label>
+			<label asp-for="@Model.FullName">Full Name</label>
 			<input asp-for="@Model.FullName" class="mb-3 form-control" type="text" aria-required="true" />
 			<span asp-validation-for="@Model.FullName" class="text-danger"></span>
-			<label asp-for="@Model.Email">@Model.Email</label>
+			<label asp-for="@Model.Email">Email</label>
 			<input asp-for="@Model.Email" class="mb-3 form-control" type="email" aria-required="true" />
 			<span asp-validation-for="@Model.Email" class="text-danger"></span>
 			<label asp-for="@Model.Description">Description about you</label>

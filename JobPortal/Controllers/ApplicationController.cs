@@ -1,4 +1,5 @@
-﻿using JobPortal.Services.Application;
+﻿using JobPortal.Core.Data.Models;
+using JobPortal.Services.Application;
 using JobPortal.ViewModels.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace JobPortal.Controllers
 
 		public async Task<IActionResult> Mine()
 		{
-			var result = await _applicationService.GetApplicationAsync(GetUserId());
+			var result = await _applicationService.GetApplicationsAsync(GetUserId());
 			return View(result);
 		}
 		[HttpGet]
@@ -35,6 +36,41 @@ namespace JobPortal.Controllers
 				return View(viewModel);
 			}
 			await _applicationService.AddApplicationAsync(viewModel, GetUserId());
+			return RedirectToAction(nameof(Mine), "Application");
+		}
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			var jobApplication = await _applicationService.GetApplication(id);
+			if (jobApplication == null)
+			{
+				return BadRequest();
+			}
+			if (jobApplication.UserId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			var viewModel = await _applicationService.BuildViewModel(jobApplication);
+			return View(viewModel);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit(AddJobApplicationViewModel model, int id)
+		{
+			var jobApplication = await _applicationService.GetApplication(id);
+			if (jobApplication == null)
+			{
+				return BadRequest();
+			}
+			if (jobApplication.UserId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			await _applicationService.EditJobApplicationAsync(model, id);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
 		public IActionResult Apply(int id)

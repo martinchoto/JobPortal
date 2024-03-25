@@ -31,7 +31,37 @@ namespace JobPortal.Services.Application
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<List<MyJobApplicationViewModel>> GetApplicationAsync(string applicantId)
+		public async Task<AddJobApplicationViewModel> BuildViewModel(JobApplication jobApplication)
+		{
+			return new AddJobApplicationViewModel()
+			{
+				ApplicationName = jobApplication.Name,
+				FullName = jobApplication.FullName,
+				Email = jobApplication.Email,
+				Description = jobApplication.Description,
+				Reasons = jobApplication.Reason
+			};
+		}
+
+		public async Task EditJobApplicationAsync(AddJobApplicationViewModel model, int id)
+		{
+			var toBeEdited = await GetApplication(id);
+
+			toBeEdited.CreatedOn = DateTime.Now;
+			toBeEdited.Name = model.ApplicationName;
+			toBeEdited.FullName = model.FullName;
+			toBeEdited.Description = model.Description;
+			toBeEdited.Reason = model.Reasons;
+			toBeEdited.Email = model.Email;
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task<JobApplication> GetApplication(int id)
+		{
+			return await _context.Applications.FindAsync(id);
+		}
+
+		public async Task<List<MyJobApplicationViewModel>> GetApplicationsAsync(string applicantId)
 		{
 			var myViewModel = await _context.Applications
 				.Where(x => x.UserId == applicantId)

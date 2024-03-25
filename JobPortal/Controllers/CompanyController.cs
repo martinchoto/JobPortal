@@ -68,7 +68,7 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
-			await _companyService.EditJobOfferAsync(viewModel, id, GetUserId());
+			await _companyService.EditJobOfferAsync(viewModel, id);
 
 			return RedirectToAction(nameof(All), "Company");
 		}
