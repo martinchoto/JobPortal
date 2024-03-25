@@ -15,7 +15,19 @@ namespace JobPortal.Services.Application
 		}
 		public async Task AddApplicationAsync(AddJobApplicationViewModel viewModel, string applicantId)
 		{
-			JobApplication application = null;
+			JobApplication application = new JobApplication()
+			{
+				FullName = viewModel.FullName,
+				Email = viewModel.Email,
+				Description = viewModel.Description,
+				Reason = viewModel.Reasons,
+				CreatedOn = DateTime.Now,
+				UserId = applicantId,
+				Name = viewModel.ApplicationName
+			};
+
+			await _context.Applications.AddAsync(application);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

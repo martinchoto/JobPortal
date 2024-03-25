@@ -1,21 +1,29 @@
-﻿@{
+﻿@using JobPortal.ViewModels.Application
+@model AddJobApplicationViewModel
+@{
 	ViewData["Title"] = "Create Application";
 }
 <div class="text-center ">
 	<h2 class="class= mb-3">@ViewData["Title"]</h2>
 	<hr />
-	<form>
+	<form asp-controller="Application" asp-action="Create">
 		<div class="row col-md-4 mx-auto text-center">
-			<label>Name of the application</label>
-			<input class="mb-3" type="text" />
-			<label>Full Name</label>
-			<input class="mb-3" type="text" />
-			<label>Email</label>
-			<input class="mb-3" type="email" />
-			<label>Description about you</label>
-			<textarea class="mb-3" style="resize: none; height: 35vh;" placeholder="Ex. previous work, education and etc."></textarea>
-			<label>Why do you want to work for this job?</label>
-			<textarea class="mb-3" style="resize: none; height: 20vh;"></textarea>
+			<label asp-for="@Model.ApplicationName">@Model.ApplicationName</label>
+			<input asp-for="@Model.ApplicationName" class="mb-3 form-control" type="text" aria-required="true" />
+			<span asp-validation-for="@Model.ApplicationName" class="text-danger"></span>
+			<label asp-for="@Model.FullName">@Model.FullName</label>
+			<input asp-for="@Model.FullName" class="mb-3 form-control" type="text" aria-required="true" />
+			<span asp-validation-for="@Model.FullName" class="text-danger"></span>
+			<label asp-for="@Model.Email">@Model.Email</label>
+			<input asp-for="@Model.Email" class="mb-3 form-control" type="email" aria-required="true" />
+			<span asp-validation-for="@Model.Email" class="text-danger"></span>
+			<label asp-for="@Model.Description">Description about you</label>
+			<textarea asp-for="@Model.Description" class="mb-3 form-control" aria-required="true" style="resize: none; height: 35vh;" 
+			placeholder="Ex. previous work, education and etc."></textarea>
+			<span asp-validation-for="@Model.Description" class="text-danger"></span>
+			<label asp-for="@Model.Reasons">Why do you want to work for this job?</label>
+			<textarea asp-for="@Model.Reasons" class="mb-3 form-control" aria-required="true" style="resize: none; height: 20vh;"></textarea>
+			<span asp-validation-for="@Model.Reasons" class="text-danger"></span>
 			<button type="submit" class="btn btn-info mb-2 w-100 p-3 fw-bold">Submit</button>
 		</div>
 	</form>

@@ -6,8 +6,6 @@ namespace JobPortal.ViewModels.Company
 {
     public class AddJobOfferViewModel
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Position { get; set; } = null!;

@@ -29,6 +29,10 @@ namespace JobPortal.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(AddJobApplicationViewModel viewModel)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 			await _applicationService.AddApplicationAsync(viewModel, GetUserId());
 			return RedirectToAction(nameof(Mine), "Application");
 		}
