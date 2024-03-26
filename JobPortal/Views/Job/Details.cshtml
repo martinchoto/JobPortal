@@ -30,16 +30,17 @@
 			else if (User.IsInRole("Applicant"))
 			{
 				<button class="btn btn-light dropdown-toggle w-75 mb-2 p-3 fw-bold"
-				   data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true"
-				   aria-expanded="false">Apply</button>
-				@foreach (var e in Model.Applications)
-				{
-					<div class="dropdown-menu">
-							<a id ="apply-link"class="dropdown-item" asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
+						data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+					Apply
+				</button>
+				<div class="dropdown-menu">
+					@foreach (var e in Model.Applications)
+					{
+						<a class="dropdown-item apply-link" asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
 							   asp-controller="Job" asp-action="Apply">@e.Name</a>
-					</div>
-				}
-
+					}
+				</div>
 			}
 		</div>
 		<p id="hidden-text" class="text-danger d-none"></p>
@@ -62,7 +63,7 @@
 @section Scripts {
 	<script>
 		$(document).ready(function () {
-			$('#apply-link').click(function (e) {
+			$('.apply-link').click(function (e) {
 				e.preventDefault();
 
 				const href = $(this).attr('href');
