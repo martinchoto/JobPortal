@@ -35,11 +35,20 @@
 					Apply
 				</button>
 				<div class="dropdown-menu">
-					@foreach (var e in Model.Applications)
+					@if (Model.Applications.Any())
 					{
-						<a class="dropdown-item apply-link" asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
+						@foreach (var e in Model.Applications)
+						{
+							<a class="dropdown-item apply-link" asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
 							   asp-controller="Job" asp-action="Apply">@e.Name</a>
+						}
 					}
+					else
+					{
+						<a class="dropdown-item" asp-controller="Application"
+						asp-action="Create">Create Application...</a>
+					}
+
 				</div>
 			}
 		</div>
