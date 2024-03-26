@@ -37,7 +37,12 @@ namespace JobPortal.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(AddJobOfferViewModel viewModel)
 		{
-			await _companyService.AddJobOfferAsync(viewModel, GetUserId());
+			var company = await _companyService.CompanyAsync(GetUserId());
+			if (company == null)
+			{
+				return BadRequest();
+			}
+			await _companyService.AddJobOfferAsync(viewModel, company.Id);
 			return RedirectToAction(nameof(All), "Company");
 		}
 		[HttpGet]
@@ -48,7 +53,7 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (edited.CompanyId != GetUserId())
+			if (edited.Company.UserId != GetUserId())
 			{
 				return Unauthorized();
 			}
@@ -64,7 +69,7 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (edited.CompanyId != GetUserId())
+			if (edited.Company.UserId != GetUserId())
 			{
 				return Unauthorized();
 			}
@@ -79,7 +84,7 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (offer.CompanyId != GetUserId())
+			if (offer.Company.UserId != GetUserId())
 			{
 				return Unauthorized();
 			}
@@ -99,7 +104,7 @@ namespace JobPortal.Controllers
             {
                 return BadRequest();
             }
-            if (offer.CompanyId != GetUserId())
+            if (offer.Company.UserId != GetUserId())
             {
                 return Unauthorized();
             }

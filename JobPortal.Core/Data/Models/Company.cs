@@ -17,5 +17,13 @@ namespace JobPortal.Core.Data.Models
 		[ForeignKey(nameof(User))]
 		public string UserId { get; set; } = null!;
 		public virtual AppUser User { get; set; } = null!;
+		[Required]
+		public string CompanyName { get; set; } = null!;
+		[Required]
+		public string LogoUrl { get; set; } = null!;
+		[Required]
+		public string Address { get; set; } = null!;
+		[Required]
+		public string Location { get; set; } = null!;
 	}
 }

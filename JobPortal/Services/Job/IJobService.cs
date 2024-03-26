@@ -1,8 +1,7 @@
-﻿using JobPortal.Core.Data.Models;
-using JobPortal.ViewModels.Job;
-
-namespace JobPortal.Services.Job
+﻿namespace JobPortal.Services.Job
 {
+	using JobPortal.Core.Data.Models;
+	using JobPortal.ViewModels.Job;
 	public interface IJobService
 	{
 		Task<List<JobOffersViewModel>> AllJobsAsync();

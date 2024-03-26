@@ -17,6 +17,7 @@
 		public string Address { get; set; } = null!;
 		public string ImageUrl { get; set; } = null!;
 		public string Type { get; set; } = null!;
+		public string UserId { get; set; } = null!;
 		public List<AllApplicationsViewModel> Applications { get; set; } = new List<AllApplicationsViewModel>();
 	}
 }

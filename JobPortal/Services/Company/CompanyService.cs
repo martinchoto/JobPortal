@@ -1,14 +1,16 @@
 ﻿using JobPortal.Core.Constants;
 using JobPortal.Core.Data;
-using JobPortal.Core.Data.Models;
+
+using JobPortal.Services.Job;
 using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobPortal.Services.Company
 {
+	using JobPortal.Core.Data.Models;
 	public class CompanyService : ICompanyService
-    {
+	{
 		private readonly JobPortalDbContext _context;
 
 		public CompanyService(JobPortalDbContext context)
@@ -19,7 +21,7 @@ namespace JobPortal.Services.Company
 		public async Task<List<AllMyJobOffers>> GetAllJobOffersForCompanyAsync(string companyId)
 		{
 			return await _context.JobOffers
-				.Where(x => x.CompanyId == companyId)
+				.Where(x => x.Company.UserId == companyId)
 				.Select(x => new AllMyJobOffers
 				{
 					Id = x.Id,
@@ -32,7 +34,7 @@ namespace JobPortal.Services.Company
 				.ToListAsync();
 		}
 
-		public async Task AddJobOfferAsync(AddJobOfferViewModel viewModel, string companyId)
+		public async Task AddJobOfferAsync(AddJobOfferViewModel viewModel, int companyId)
 		{
 			var jobOffer = new JobOffer
 			{
@@ -97,15 +99,19 @@ namespace JobPortal.Services.Company
 			await _context.SaveChangesAsync();
 		}
 
-        public async Task DeleteJobOffer(JobOffer jobOffer)
-        {
+		public async Task DeleteJobOffer(JobOffer jobOffer)
+		{
 			if (jobOffer.JobOfferApplications.Any())
 			{
-                jobOffer.JobOfferApplications.Clear();
+				jobOffer.JobOfferApplications.Clear();
 
-            }
+			}
 			_context.JobOffers.Remove(jobOffer);
 			await _context.SaveChangesAsync();
-        }
-    }
+		}
+		public async Task<Company> CompanyAsync(string companyId)
+		{
+			return await _context.Companies.FirstOrDefaultAsync(x => x.UserId == companyId);
+		}
+	}
 }

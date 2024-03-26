@@ -23,9 +23,8 @@ namespace JobPortal.Core.Data.Models
 		public string Bonus { get; set; } = null!;
 		public DateTime PostedDate { get; set; }
 		[ForeignKey(nameof(Company))]
-		[Required]
-		public string CompanyId { get; set; } = null!;
-		public virtual AppUser Company { get; set; } = null!;
+		public int CompanyId { get; set; }
+		public virtual Company Company { get; set; } = null!;
 		[ForeignKey(nameof(Type))]
 		public int TypeId { get; set; }
 		public virtual Type Type { get; set; } = null!;

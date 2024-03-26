@@ -6,7 +6,6 @@
 @{
 	var user = await UserManager.GetUserAsync(User);
 	var firstName = user?.FirstName;
-	var companyName = user?.CompanyName;
 }
 
 <ul class="navbar-nav">
@@ -15,7 +14,7 @@
 		if (User.IsInRole("Company"))
 		{
 			<li class="nav-item">
-				<a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@user?.CompanyName</a>
+				<a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@user?.UserName</a>
 			</li>
 		}
 		else if (User.IsInRole("Applicant"))

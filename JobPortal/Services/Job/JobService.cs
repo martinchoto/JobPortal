@@ -4,6 +4,7 @@ using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Job;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using Company = JobPortal.Core.Data.Models.Company;
 
 namespace JobPortal.Services.Job
 {
@@ -48,7 +49,7 @@ namespace JobPortal.Services.Job
 				VacationDays = job.VacationDays,
 				Bonus = job.Bonus,
 				Location = job.Company.Location,
-				Email = job.Company.Email,
+				Email = job.Company.User.Email,
 				ImageUrl = job.Company.LogoUrl,
 				Address = job.Company.Address,
 				CompanyName = job.Company.CompanyName,
@@ -56,6 +57,7 @@ namespace JobPortal.Services.Job
 				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 				Type = job.Type.Name,
 				Applications = await GetAllApplicationsAsync(userId),
+				UserId = userId,
 			};
 			return jobViewModel;
 		}

@@ -34,7 +34,11 @@ namespace JobPortal.Core.Data
             builder.Entity<Type>()
                 .HasData(seedData.SeedTypes());
 
-            builder.Entity<JobOfferApplication>()
+
+			builder.Entity<Company>()
+				.HasData(seedData.SeedCompanies());
+
+			builder.Entity<JobOfferApplication>()
                 .HasKey(pk => new { pk.JobOfferId, pk.ApplicationId });
 
             builder.Entity<JobOfferApplication>()

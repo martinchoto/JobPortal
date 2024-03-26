@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using JobPortal.Core.Data.Identity;
+using JobPortal.Core.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -106,10 +107,6 @@ namespace JobPortal.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.CompanyName = Input.CompanyName;
-                user.Address = Input.Address;
-                user.Location = Input.Location;
-                user.LogoUrl = Input.LogoUrl;
 
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -119,6 +116,14 @@ namespace JobPortal.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    Company company = new Company()
+                    {
+                        CompanyName = Input.CompanyName,
+                        LogoUrl = Input.LogoUrl,
+                        Location = Input.Location,
+                        Address = Input.Address,
+                        UserId = user.Id
+                    };
                     await _userManager.AddToRoleAsync(user, "Company");
 
 
