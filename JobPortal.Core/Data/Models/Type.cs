@@ -10,5 +10,5 @@ namespace JobPortal.Core.Data.Models
 		[Required]
 		[StringLength(25)]
 		public string Name { get; set; } = null!;
-    }
+	}
 }

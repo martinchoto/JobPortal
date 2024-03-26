@@ -22,7 +22,7 @@ using Microsoft.Extensions.Logging;
 
 namespace JobPortal.Areas.Identity.Pages.Account
 {
-    public class RegisterCompany : PageModel
+	public class RegisterCompany : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;

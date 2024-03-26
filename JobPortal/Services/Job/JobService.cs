@@ -1,5 +1,5 @@
-﻿using Job_Portal.Data;
-using JobPortal.Core.Constants;
+﻿using JobPortal.Core.Constants;
+using JobPortal.Core.Data;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Job;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +14,10 @@ namespace JobPortal.Services.Job
 		{
 			_context = context;
 		}
-		public async Task<List<AllJobsViewModel>> AllJobsAsync()
+		public async Task<List<JobOffersViewModel>> AllJobsAsync()
 		{
 			var jobs = await _context.JobOffers
-				.Select(x => new AllJobsViewModel
+				.Select(x => new JobOffersViewModel
 				{
 					Id = x.Id,
 					Position = x.Position,
@@ -31,7 +31,13 @@ namespace JobPortal.Services.Job
 			return jobs;
 		}
 
-		public async Task<JobDetailsViewModel> BuildDetailsViewModel(JobOffer job)
+		public Task<bool> AlreadyAppliedForAJobAsync(int jobId, int applicationId)
+		{
+			return _context.JobOffersApplications.AnyAsync(x => x.ApplicationId
+			== applicationId && x.JobOfferId == jobId);
+		}
+
+		public async Task<JobDetailsViewModel> BuildDetailsViewModel(JobOffer job, string userId)
 		{
 			var jobViewModel = new JobDetailsViewModel
 			{
@@ -48,7 +54,8 @@ namespace JobPortal.Services.Job
 				CompanyName = job.Company.CompanyName,
 				Description = job.Description,
 				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
-				Type = job.Type.Name
+				Type = job.Type.Name,
+				Applications = await GetAllApplicationsAsync(userId),
 			};
 			return jobViewModel;
 		}
@@ -56,6 +63,31 @@ namespace JobPortal.Services.Job
 		public async Task<JobOffer> FindJobAsync(int jobId)
 		{
 			return await _context.JobOffers.FindAsync(jobId);
+		}
+
+		public async Task<List<AllApplicationsViewModel>> GetAllApplicationsAsync(string userId)
+		{
+			var applications = await _context.Applications
+				.Where(a => a.UserId == userId)
+				.Select(x => new AllApplicationsViewModel
+				{
+					Id = x.Id,
+					Name = x.Name
+				})
+				.ToListAsync();
+
+			return applications;
+		}
+		public async Task AddJobApplicationToJobOfferAsync(int jobId, int applicationId)
+		{
+			JobOfferApplication job = new JobOfferApplication()
+			{
+				ApplicationId = applicationId,
+				JobOfferId = jobId
+			};
+
+			await _context.JobOffersApplications.AddAsync(job);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

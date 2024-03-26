@@ -1,6 +1,6 @@
 ﻿using Type = JobPortal.Core.Data.Models.Type;
 
-namespace JobPortal.Data
+namespace JobPortal.Core
 {
 	public class SeedData
 	{

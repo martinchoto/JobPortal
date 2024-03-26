@@ -1,5 +1,5 @@
-﻿using Job_Portal.Data;
-using JobPortal.Core.Constants;
+﻿using JobPortal.Core.Constants;
+using JobPortal.Core.Data;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Application;
 using Microsoft.EntityFrameworkCore;

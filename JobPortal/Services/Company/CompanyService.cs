@@ -1,5 +1,5 @@
-﻿using Job_Portal.Data;
-using JobPortal.Core.Constants;
+﻿using JobPortal.Core.Constants;
+using JobPortal.Core.Data;
 using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Company;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobPortal.Services.Company
 {
-    public class CompanyService : ICompanyService
+	public class CompanyService : ICompanyService
     {
 		private readonly JobPortalDbContext _context;
 

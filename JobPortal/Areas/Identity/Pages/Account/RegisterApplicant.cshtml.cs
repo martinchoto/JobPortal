@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.Areas.Identity.Pages.Account
 {
-    public class RegisterApplicant : PageModel
+	public class RegisterApplicant : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;

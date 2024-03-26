@@ -13,7 +13,7 @@ namespace JobPortal.Core.Data.Identity
 		// for companies variant
 		public string? CompanyName { get; set; }
 		public string? LogoUrl { get; set; }
-		public string? Address { get; set; } 
+		public string? Address { get; set; }
 		public string? Location { get; set; }
 	}
 }

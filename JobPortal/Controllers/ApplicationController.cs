@@ -1,5 +1,4 @@
-﻿using JobPortal.Core.Data.Models;
-using JobPortal.Services.Application;
+﻿using JobPortal.Services.Application;
 using JobPortal.ViewModels.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +72,11 @@ namespace JobPortal.Controllers
 			await _applicationService.EditJobApplicationAsync(model, id);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
-		public IActionResult Apply(int id)
+		public async Task<IActionResult> Details(int id)
+		{
+			return View();
+		}
+		public async Task<IActionResult> Delete(int id)
 		{
 			return View();
 		}

@@ -1,9 +1,7 @@
-﻿using Job_Portal.Data;
-using JobPortal.Core.Constants;
-using JobPortal.Services.Job;
-using JobPortal.ViewModels.Job;
+﻿using JobPortal.Services.Job;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace JobPortal.Controllers
 {
@@ -27,8 +25,25 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			var jobViewModel = await _jobService.BuildDetailsViewModel(job);
+			var jobViewModel = await _jobService.BuildDetailsViewModel(job, GetUserId());
 			return View(jobViewModel);
 		}
+		public async Task<JsonResult> Apply(int jobId, int applicationId)
+		{
+			if (await _jobService.AlreadyAppliedForAJobAsync(jobId, applicationId))
+			{
+				return Json(new { alreadyApplied = true });
+			}
+
+			await _jobService.AddJobApplicationToJobOfferAsync(jobId, applicationId);
+
+			return Json(new { alreadyApplied = false });
+		}
+		public async Task<IActionResult> ShowMine()
+		{
+			return View();
+		}
+		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
+
 }

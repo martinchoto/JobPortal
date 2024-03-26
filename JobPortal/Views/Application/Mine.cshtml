@@ -1,5 +1,4 @@
-﻿@using JobPortal.ViewModels.Application
-@model List<MyJobApplicationViewModel>
+﻿@model List<MyJobApplicationViewModel>
 @{
 	ViewData["Title"] = "My applications";
 }
@@ -9,11 +8,11 @@
 	@foreach (var e in Model)
 	{
 		<div class="col-md-4">
-			<p>ApplicationName</p>
+			<p>Application Name</p>
 			<p>@e.Name</p>
 		</div>
 		<div class="col-md-4">
-			<p>Created On</p>
+			<p>Last Updated On</p>
 			<p>@e.CreatedOn</p>
 		</div>
 		<div class="col-md-4 justify-content-center">

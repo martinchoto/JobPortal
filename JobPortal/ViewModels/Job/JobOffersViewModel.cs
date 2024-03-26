@@ -1,6 +1,6 @@
 ﻿namespace JobPortal.ViewModels.Job
 {
-    public class AllJobsViewModel
+    public class JobOffersViewModel
     {
 		public int Id { get; set; }
 		public string Status { get; set; } = null!;

@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace JobPortal.Controllers
 {
-    [Authorize(Roles = "Company")]
+	[Authorize(Roles = "Company")]
 	public class CompanyController : Controller
 	{
 		private readonly ICompanyService _companyService;

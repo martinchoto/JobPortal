@@ -1,12 +1,9 @@
-﻿@using JobPortal.Core.Data.Identity
-@using JobPortal.ViewModels.Job
-@inject UserManager<AppUser> UserManager
+﻿@inject UserManager<AppUser> UserManager
 @model JobDetailsViewModel
 @{
 	ViewData["Title"] = "Job Details";
 	var user = await UserManager.GetUserAsync(User);
 }
-
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 <img class="mx-auto d-block" style="width: 20rem;" src="@Model.ImageUrl" />
@@ -32,9 +29,20 @@
 			}
 			else if (User.IsInRole("Applicant"))
 			{
-				<a asp-controller="Application" asp-action="Apply" asp-route-id="@Model.Id" class="btn btn-light w-75 mb-2 p-3 fw-bold">Apply</a>
+				<button class="btn btn-light dropdown-toggle w-75 mb-2 p-3 fw-bold"
+				   data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true"
+				   aria-expanded="false">Apply</button>
+				@foreach (var e in Model.Applications)
+				{
+					<div class="dropdown-menu">
+							<a id ="apply-link"class="dropdown-item" asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
+							   asp-controller="Job" asp-action="Apply">@e.Name</a>
+					</div>
+				}
+
 			}
 		</div>
+		<p id="hidden-text" class="text-danger d-none"></p>
 	</div>
 	<div class="col">
 		<label>Description</label>
@@ -51,4 +59,40 @@
 		<p>@Model.Address</p>
 	</div>
 </div>
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#apply-link').click(function (e) {
+				e.preventDefault();
+
+				const href = $(this).attr('href');
+
+				const urlParams = new URLSearchParams(href.split('?')[1]);
+
+				const applicationId = urlParams.get('applicationId');
+				const jobId = urlParams.get('jobId');
+
+				const hiddenText = $('#hidden-text');
+				hiddenText.removeClass('d-none').show();
+				$.ajax({
+					url: '/Job/Apply',
+					type: 'POST',
+					data: { jobId: jobId, applicationId: applicationId },
+					success: function (response) {
+						if (response.alreadyApplied) {
+							hiddenText.text('You have already applied for this job.');
+						} else {
+							hidden.text('Application successful!');
+						}
+					},
+					error: function (xhr, status, error) {
+						console.error(xhr.responseText);
+					}
+				});
+			});
+		});
+	</script>
+}
+
+
 

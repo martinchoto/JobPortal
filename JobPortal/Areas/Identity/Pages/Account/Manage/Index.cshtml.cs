@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JobPortal.Areas.Identity.Pages.Account.Manage
 {
-    public class IndexModel : PageModel
+	public class IndexModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
