@@ -10,6 +10,8 @@ namespace JobPortal.Services.Application
 		Task<JobApplication> GetApplication(int id);
 		Task<AddJobApplicationViewModel> BuildViewModel(JobApplication jobApplication);
 		Task EditJobApplicationAsync(AddJobApplicationViewModel model, int id);
+		Task<DeleteApplicationViewModel> BuildDeleteModelAsync(JobApplication jobApplication);
+		Task DeleteApplicationAsync(JobApplication application);
 
 	}
 }

@@ -80,9 +80,9 @@
 					data: { jobId: jobId, applicationId: applicationId },
 					success: function (response) {
 						if (response.alreadyApplied) {
-							hiddenText.text('You have already applied for this job.');
+							hiddenText.text('You have already applied for this job with this application.');
 						} else {
-							hidden.text('Application successful!');
+							hiddenText.text('You have sent the application successfully!');
 						}
 					},
 					error: function (xhr, status, error) {

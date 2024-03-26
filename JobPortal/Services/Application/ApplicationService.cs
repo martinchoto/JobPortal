@@ -74,5 +74,22 @@ namespace JobPortal.Services.Application
 				.ToListAsync();
 			return myViewModel;
 		}
+		public async Task<DeleteApplicationViewModel> BuildDeleteModelAsync(JobApplication application)
+		{
+			DeleteApplicationViewModel viewModel = new DeleteApplicationViewModel()
+			{
+				Id = application.Id,
+				Name = application.Name,
+				UpdatedOn = application.CreatedOn.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)
+			};
+
+			return viewModel;
+		}
+
+		public async Task DeleteApplicationAsync(JobApplication application)
+		{
+			_context.Applications.Remove(application);
+			await _context.SaveChangesAsync();
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using JobPortal.Services.Application;
+﻿using JobPortal.Core.Data.Models;
+using JobPortal.Services.Application;
 using JobPortal.ViewModels.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,13 +73,33 @@ namespace JobPortal.Controllers
 			await _applicationService.EditJobApplicationAsync(model, id);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
-		public async Task<IActionResult> Details(int id)
-		{
-			return View();
-		}
 		public async Task<IActionResult> Delete(int id)
 		{
-			return View();
+			JobApplication application = await _applicationService.GetApplication(id);
+			if (application == null)
+			{
+				return BadRequest();
+			}
+			if (application.UserId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			DeleteApplicationViewModel model = await _applicationService.BuildDeleteModelAsync(application);
+			return View(model);
+		}
+		public async Task<IActionResult> ConfirmDelete(int id)
+		{
+			JobApplication application = await _applicationService.GetApplication(id);
+			if (application == null)
+			{
+				return BadRequest();
+			}
+			if (application.UserId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			await _applicationService.DeleteApplicationAsync(application);
+			return RedirectToAction(nameof(Mine), "Application");
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
