@@ -99,6 +99,11 @@ namespace JobPortal.Services.Company
 
         public async Task DeleteJobOffer(JobOffer jobOffer)
         {
+			if (jobOffer.JobOfferApplications.Any())
+			{
+                jobOffer.JobOfferApplications.Clear();
+
+            }
 			_context.JobOffers.Remove(jobOffer);
 			await _context.SaveChangesAsync();
         }
