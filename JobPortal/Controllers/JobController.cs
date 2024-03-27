@@ -42,7 +42,14 @@ namespace JobPortal.Controllers
 		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> AllCompanies()
 		{
-			return View();
+			var companies = await _jobService.GetAllCompaniesAsync();
+			return View(companies);
+		}
+		[Authorize(Roles = "Applicant")]
+		public async Task<IActionResult> AllOffers(int id)
+		{
+			var companies = await _jobService.GetCompanyOffers(id);
+			return View(companies);
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}

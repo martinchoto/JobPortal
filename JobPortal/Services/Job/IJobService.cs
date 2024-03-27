@@ -10,5 +10,7 @@
 		Task<bool> AlreadyAppliedForAJobAsync(int jobId, int applicationId);
 		Task<List<AllApplicationsViewModel>> GetAllApplicationsAsync(string userId);
 		Task AddJobApplicationToJobOfferAsync(int jobId, int applicationId);
+		Task<List<AllCompaniesViewModel>> GetAllCompaniesAsync();
+		Task<List<JobOffersViewModel>> GetCompanyOffers(int id);
 	}
 }

@@ -1,6 +1,19 @@
-﻿
+﻿@model List<AllCompaniesViewModel>
 @{
 	ViewBag.Title = "All companies";
 }
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+<div class="text-center row">
+	@foreach (var e in Model)
+	{
+		<div class="card col-2 g-3 mx-3" style="width: 25rem; ">
+			<div class="card-body">
+				<img style="width: 15rem;" src="@e.ImageUrl" />
+				<h5 class="card-title mt-1 mb-3">@e.Name</h5>
+				<a asp-controller="Job" asp-action="AllOffers" 
+				asp-route-id="@e.Id" class="btn btn-light mb-2 w-100 p-3 fw-bold">View job offers</a>
+			</div>
+		</div>
+	}
+</div>

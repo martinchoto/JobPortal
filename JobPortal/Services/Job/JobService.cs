@@ -90,5 +90,34 @@ namespace JobPortal.Services.Job
 			await _context.JobOffersApplications.AddAsync(job);
 			await _context.SaveChangesAsync();
 		}
+
+		public async Task<List<AllCompaniesViewModel>> GetAllCompaniesAsync()
+		{
+			return await _context.Companies
+				.Select(x => new AllCompaniesViewModel
+				{
+					Id = x.Id,
+					Name = x.CompanyName,
+					ImageUrl = x.LogoUrl
+				})
+				.ToListAsync();
+		}
+
+		public async Task<List<JobOffersViewModel>> GetCompanyOffers(int id)
+		{
+			return await _context.JobOffers
+				.Where(x => x.CompanyId == id)
+				.Select(x => new JobOffersViewModel
+				{
+					Id = x.Id,
+					ImageUrl = x.Company.LogoUrl,
+					VacationDays = x.VacationDays,
+					Position = x.Position,
+					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
+					Status = x.Status,
+					Type = x.Type.Name
+				})
+				.ToListAsync();
+		}
 	}
 }
