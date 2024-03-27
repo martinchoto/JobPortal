@@ -1,4 +1,7 @@
-﻿using JobPortal.Services.Job;
+﻿using JobPortal.Core.Data.Models;
+using JobPortal.Services.Job;
+using JobPortal.ViewModels.Company;
+using JobPortal.ViewModels.Job;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -15,17 +18,17 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> All()
 		{
-			var jobs = await _jobService.AllJobsAsync();
+			List<JobOffersViewModel> jobs = await _jobService.AllJobsAsync();
 			return View(jobs);
 		}
 		public async Task<IActionResult> Details(int id)
 		{
-			var job = await _jobService.FindJobAsync(id);
+			JobOffer job = await _jobService.FindJobAsync(id);
 			if (job == null)
 			{
 				return BadRequest();
 			}
-			var jobViewModel = await _jobService.BuildDetailsViewModel(job, GetUserId());
+			JobDetailsViewModel jobViewModel = await _jobService.BuildDetailsViewModel(job, GetUserId());
 			return View(jobViewModel);
 		}
 		public async Task<JsonResult> Apply(int jobId, int applicationId)
@@ -42,13 +45,13 @@ namespace JobPortal.Controllers
 		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> AllCompanies()
 		{
-			var companies = await _jobService.GetAllCompaniesAsync();
+			List<AllCompaniesViewModel> companies = await _jobService.GetAllCompaniesAsync();
 			return View(companies);
 		}
 		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> AllOffers(int id)
 		{
-			var companies = await _jobService.GetCompanyOffers(id);
+			List<JobOffersViewModel> companies = await _jobService.GetCompanyOffers(id);
 			return View(companies);
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);

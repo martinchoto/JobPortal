@@ -19,7 +19,9 @@ namespace JobPortal.Controllers
 
 		public async Task<IActionResult> Mine()
 		{
-			var result = await _applicationService.GetApplicationsAsync(GetUserId());
+			List<MyJobApplicationViewModel> result = 
+				await _applicationService.GetApplicationsAsync(GetUserId());
+
 			return View(result);
 		}
 		[HttpGet]
@@ -51,13 +53,13 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
-			var viewModel = await _applicationService.BuildViewModel(jobApplication);
+			AddJobApplicationViewModel viewModel = await _applicationService.BuildViewModel(jobApplication);
 			return View(viewModel);
 		}
 		[HttpPost]
 		public async Task<IActionResult> Edit(AddJobApplicationViewModel model, int id)
 		{
-			var jobApplication = await _applicationService.GetApplication(id);
+			JobApplication jobApplication = await _applicationService.GetApplication(id);
 			if (jobApplication == null)
 			{
 				return BadRequest();
@@ -104,12 +106,12 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> Details(int id)
 		{
-			var jobApp = await _applicationService.GetApplication(id);
+			JobApplication jobApp = await _applicationService.GetApplication(id);
 			if (jobApp == null)
 			{
 				return BadRequest();
 			}
-			var model = await _applicationService.BuildDetailsViewModelAsync(jobApp);
+			DetailsApplicationViewModel model = await _applicationService.BuildDetailsViewModelAsync(jobApp);
 			return View(model);
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
