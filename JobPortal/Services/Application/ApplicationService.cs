@@ -96,5 +96,19 @@ namespace JobPortal.Services.Application
             await _context.SaveChangesAsync();
 
         }
-    }
+
+		public async Task<DetailsApplicationViewModel> BuildDetailsViewModelAsync(JobApplication jobApp)
+		{
+            DetailsApplicationViewModel viewModel = new DetailsApplicationViewModel()
+            {
+                Description = jobApp.Description,
+                Email = jobApp.Email,
+                FullName = jobApp.FullName,
+                Name = jobApp.Name,
+                Reasons = jobApp.Reason
+            };
+            return viewModel;
+		}
+
+	}
 }

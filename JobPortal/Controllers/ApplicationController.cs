@@ -3,6 +3,7 @@ using JobPortal.Services.Application;
 using JobPortal.ViewModels.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace JobPortal.Controllers
@@ -103,7 +104,13 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> Details(int id)
 		{
-			return View();
+			var jobApp = await _applicationService.GetApplication(id);
+			if (jobApp == null)
+			{
+				return BadRequest();
+			}
+			var model = await _applicationService.BuildDetailsViewModelAsync(jobApp);
+			return View(model);
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
