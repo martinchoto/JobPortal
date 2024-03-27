@@ -4,7 +4,6 @@ using JobPortal.Core.Data.Models;
 using JobPortal.ViewModels.Job;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using Company = JobPortal.Core.Data.Models.Company;
 
 namespace JobPortal.Services.Job
 {

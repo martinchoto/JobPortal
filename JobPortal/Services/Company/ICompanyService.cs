@@ -5,6 +5,8 @@ using Microsoft.CodeAnalysis.Differencing;
 namespace JobPortal.Services.Company
 {
 	using JobPortal.Core.Data.Models;
+	using JobPortal.ViewModels.Application;
+
 	public interface ICompanyService
 	{
 
@@ -16,5 +18,9 @@ namespace JobPortal.Services.Company
 		Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id);
 		Task DeleteJobOffer(JobOffer jobOffer);
 		Task<Company> CompanyAsync(string companyId);
+		Task<List<MyJobApplicationViewModel>> GetAllApplicationsForJobOffers(int id);
+		Task<JobOfferApplication> GetApplicationById(int id);
+		Task DeleteApplication(JobOfferApplication jobOfferApplication);
+		Task<DetailsApplicationViewModel> DetailsBuildViewModel(JobOfferApplication jobApplication);
 	}
 }

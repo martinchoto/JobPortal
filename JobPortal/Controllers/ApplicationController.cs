@@ -101,6 +101,10 @@ namespace JobPortal.Controllers
 			await _applicationService.DeleteApplicationAsync(application);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
+		public async Task<IActionResult> Details(int id)
+		{
+			return View();
+		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
 }

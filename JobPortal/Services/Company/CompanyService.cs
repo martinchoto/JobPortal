@@ -1,14 +1,15 @@
 ﻿using JobPortal.Core.Constants;
 using JobPortal.Core.Data;
-
-using JobPortal.Services.Job;
 using JobPortal.ViewModels.Company;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace JobPortal.Services.Company
 {
 	using JobPortal.Core.Data.Models;
+	using JobPortal.ViewModels.Application;
+	
+
 	public class CompanyService : ICompanyService
 	{
 		private readonly JobPortalDbContext _context;
@@ -112,6 +113,46 @@ namespace JobPortal.Services.Company
 		public async Task<Company> CompanyAsync(string companyId)
 		{
 			return await _context.Companies.FirstOrDefaultAsync(x => x.UserId == companyId);
+		}
+
+		public async Task<List<MyJobApplicationViewModel>> GetAllApplicationsForJobOffers(int id)
+		{
+			List<MyJobApplicationViewModel> allJobs = await _context.JobOffersApplications
+				.Where(x => x.JobOfferId == id)
+				.Select(x => new MyJobApplicationViewModel
+				{
+					Id = x.ApplicationId,
+					Name = x.Application.Name,
+					CreatedOn = x.Application.CreatedOn.ToString(DataConstants.DATE_FORMAT, 
+					CultureInfo.InvariantCulture),
+				})
+				.ToListAsync();
+
+			return allJobs;
+		}
+		public async Task<JobOfferApplication> GetApplicationById(int id)
+		{
+			return await _context.JobOffersApplications.FirstOrDefaultAsync(x => x.ApplicationId == id);
+		}
+
+		public async Task DeleteApplication(JobOfferApplication jobOfferApplication)
+		{
+			_context.JobOffersApplications.Remove(jobOfferApplication);
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task<DetailsApplicationViewModel> DetailsBuildViewModel(JobOfferApplication jobApplication)
+		{
+			DetailsApplicationViewModel viewModel = new DetailsApplicationViewModel()
+			{
+				Name = jobApplication.Application.Name,
+				Description = jobApplication.Application.Description,
+				Email = jobApplication.Application.Email,
+				FullName = jobApplication.Application.FullName,
+				Reasons = jobApplication.Application.Reason
+			};
+
+			return viewModel;
 		}
 	}
 }

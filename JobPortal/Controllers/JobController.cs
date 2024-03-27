@@ -39,7 +39,8 @@ namespace JobPortal.Controllers
 
 			return Json(new { alreadyApplied = false });
 		}
-		public async Task<IActionResult> ShowMine()
+		[Authorize(Roles = "Applicant")]
+		public async Task<IActionResult> AllCompanies()
 		{
 			return View();
 		}

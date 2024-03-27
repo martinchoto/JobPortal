@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<MyJobApplicationViewModel>
 @{
+	ViewData["Title"] = "Applicants";
 }
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+@foreach (var e in Model)
+{
+	<div class="row bg-light p-4 text-center">
+	<div class="col-md-4">
+		<p>Application Name</p>
+		<p>@e.Name<p>
+	</div>
+	<div class="col-md-4">
+		<p>Last Updated On</p>
+		<p>@e.CreatedOn</p>
+	</div>
+	<div class="col-md-4 justify-content-center">
+		<a asp-controller="Company" asp-route-id="@e.Id" asp-action="Details" class="btn btn-info mb-2 w-25">Details</a>
+		<br />
+		<a asp-controller="Company" asp-route-id="@e.Id" asp-action="DeleteApplication" class="btn btn-danger mb-2 w-25">Delete</a>
+	</div>
+	<hr class="text-dark" />
+</div>
+}
+
+

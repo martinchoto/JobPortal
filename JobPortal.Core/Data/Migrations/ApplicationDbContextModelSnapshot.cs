@@ -178,7 +178,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Applications", (string)null);
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.JobOffer", b =>
@@ -229,7 +229,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("JobOffers");
+                    b.ToTable("JobOffers", (string)null);
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.JobOfferApplication", b =>
@@ -244,7 +244,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("JobOffersApplications");
+                    b.ToTable("JobOffersApplications", (string)null);
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.Type", b =>
@@ -262,7 +262,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Types");
+                    b.ToTable("Types", (string)null);
 
                     b.HasData(
                         new
