@@ -3,12 +3,11 @@ using JobPortal.Services.Application;
 using JobPortal.ViewModels.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace JobPortal.Controllers
 {
-	[Authorize(Roles = "Applicant")]
+	[Authorize(Roles = "Applicant,Company")]
 	public class ApplicationController : Controller
 	{
 		private readonly IApplicationService _applicationService;
@@ -16,7 +15,7 @@ namespace JobPortal.Controllers
 		{
 			_applicationService = applicationService;
 		}
-
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Mine()
 		{
 			List<MyJobApplicationViewModel> result = 
@@ -25,6 +24,7 @@ namespace JobPortal.Controllers
 			return View(result);
 		}
 		[HttpGet]
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Create()
 		{
 			AddJobApplicationViewModel viewModel = new AddJobApplicationViewModel();
@@ -32,6 +32,7 @@ namespace JobPortal.Controllers
 			return View(viewModel);
 		}
 		[HttpPost]
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Create(AddJobApplicationViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
@@ -42,6 +43,7 @@ namespace JobPortal.Controllers
 			return RedirectToAction(nameof(Mine), "Application");
 		}
 		[HttpGet]
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var jobApplication = await _applicationService.GetApplication(id);
@@ -57,6 +59,7 @@ namespace JobPortal.Controllers
 			return View(viewModel);
 		}
 		[HttpPost]
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Edit(AddJobApplicationViewModel model, int id)
 		{
 			JobApplication jobApplication = await _applicationService.GetApplication(id);
@@ -76,6 +79,7 @@ namespace JobPortal.Controllers
 			await _applicationService.EditJobApplicationAsync(model, id);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			JobApplication application = await _applicationService.GetApplication(id);
@@ -90,6 +94,7 @@ namespace JobPortal.Controllers
 			DeleteApplicationViewModel model = await _applicationService.BuildDeleteModelAsync(application);
 			return View(model);
 		}
+		[Authorize(Roles = "Applicant")]
 		public async Task<IActionResult> ConfirmDelete(int id)
 		{
 			JobApplication application = await _applicationService.GetApplication(id);

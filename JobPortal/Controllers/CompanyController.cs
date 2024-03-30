@@ -127,16 +127,6 @@ namespace JobPortal.Controllers
 			await _companyService.DeleteApplication(toBeDeleted);
 			return RedirectToAction("All", "Company");
 		}
-		public async Task<IActionResult> Details(int id)
-		{
-			JobOfferApplication jobApplication = await _companyService.GetApplicationById(id);
-			if (jobApplication == null)
-			{
-				return BadRequest();
-			}
-			var model = await _companyService.DetailsBuildViewModel(jobApplication);
-			return View(model);
-		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
 }
