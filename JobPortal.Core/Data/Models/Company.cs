@@ -20,5 +20,6 @@ namespace JobPortal.Core.Data.Models
 		public string Address { get; set; } = null!;
 		[Required]
 		public string Location { get; set; } = null!;
+		public virtual List<Event> Events { get; set; } = new List<Event>();
 	}
 }

@@ -21,6 +21,8 @@ namespace JobPortal.Core.Data
         public DbSet<Type> Types { get; set; } = null!;
         public DbSet<JobApplication> Applications { get; set; } = null!;
         public DbSet<JobOfferApplication> JobOffersApplications { get; set; } = null!;
+        public DbSet<Event> Events { get; set; } = null!;
+        public DbSet<EventParticipants> EventsParticipants { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -52,6 +54,21 @@ namespace JobPortal.Core.Data
                 .WithMany(jo => jo.JobOfferApplications)
                 .HasForeignKey(fk => fk.ApplicationId).
                 OnDelete(DeleteBehavior.Restrict);
-        }
+
+			builder.Entity<EventParticipants>()
+				.HasKey(pk => new { pk.EventId, pk.ParticipantId });
+
+			builder.Entity<EventParticipants>()
+				.HasOne(e => e.Event)
+				.WithMany(p => p.EventParticipants)
+				.HasForeignKey(fk => fk.EventId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<EventParticipants>()
+				.HasOne(p => p.Participant)
+				.WithMany(e => e.EventParticipants)
+				.HasForeignKey(fk => fk.ParticipantId).
+				OnDelete(DeleteBehavior.Restrict);
+		}
     }
 }

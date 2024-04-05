@@ -11,11 +11,6 @@
 	<header>
 		<nav class="navbar navbar-expand-lg bg-primary mb-lg-3" data-bs-theme="dark">
 			<div class="container">
-				<a class="navbar-brand" asp-controller="Home" asp-action="Index" asp-area="">Job Portal</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
 						@if (User.Identity.IsAuthenticated)
@@ -31,9 +26,23 @@
 								<li class="nav-item">
 									<a class="nav-link" asp-controller="Company" asp-action="Add" asp-area="">Add Offer</a>
 								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Company" asp-action="Add" asp-area="">Create Event</a>
+								</li>
+
 							}
-							else if (User.IsInRole("Applicant"))
+							@if (User.IsInRole("Company") || User.IsInRole("Applicant"))
 							{
+
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Application" asp-action="Mine" asp-area="">Events</a>
+								</li>
+							}
+							@if (User.IsInRole("Applicant"))
+							{
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Job" asp-action="AllCompanies" asp-area="">Joined Events</a>
+								</li>
 								<li class="nav-item">
 									<a class="nav-link" asp-controller="Application" asp-action="Mine" asp-area="">My Applications</a>
 								</li>
@@ -43,8 +52,8 @@
 								<li class="nav-item">
 									<a class="nav-link" asp-controller="Job" asp-action="AllCompanies" asp-area="">All companies</a>
 								</li>
-
 							}
+
 						}
 
 					</ul>
@@ -59,9 +68,9 @@
 		</main>
 	</div>
 	@*<footer class="border-top footer text-muted">
-		<div class="container">
-			&copy; @DateTime.Now.Year - Job Portal
-		</div>
+	<div class="container">
+	&copy; @DateTime.Now.Year - Job Portal
+	</div>
 	</footer>*@
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
