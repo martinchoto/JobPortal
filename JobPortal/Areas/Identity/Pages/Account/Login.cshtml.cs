@@ -44,8 +44,8 @@ namespace JobPortal.Areas.Identity.Pages.Account
 			[Required]
 			[DataType(DataType.Password)]
 			public string Password { get; set; }
-			[Display(Name = "Remember me?")]
-			public bool RememberMe { get; set; }
+			/*[Display(Name = "Remember me?")]
+			public bool RememberMe { get; set; }*/
 		}
 
 		public async Task<IActionResult> OnGetAsync(string returnUrl = null)
@@ -79,21 +79,19 @@ namespace JobPortal.Areas.Identity.Pages.Account
 			{
 				var result = await _signInManager.PasswordSignInAsync(Input.Username,
 					Input.Password,
-					Input.RememberMe,
+					true,
 					lockoutOnFailure: false);
 				if (result.Succeeded)
 				{
 					_logger.LogInformation("User logged in.");
-					return LocalRedirect(returnUrl);
-				}
-				if (result.RequiresTwoFactor)
-				{
-					return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, Input.RememberMe });
-				}
-				if (result.IsLockedOut)
-				{
-					_logger.LogWarning("User account locked out.");
-					return RedirectToPage("./Lockout");
+					if (returnUrl != null)
+					{
+						return LocalRedirect(returnUrl);
+					}
+					else
+					{
+						return RedirectToAction("Index", "Home");	
+					}
 				}
 				else
 				{

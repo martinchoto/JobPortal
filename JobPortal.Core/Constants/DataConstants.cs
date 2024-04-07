@@ -9,6 +9,7 @@ namespace JobPortal.Core.Constants
 {
 	public class DataConstants
 	{
+		//Formats
 		public const string DECIMAL_FORMAT = "0.##";
 		public const string DATE_FORMAT = "dd/MM/yy HH:mm";
 
@@ -18,7 +19,7 @@ namespace JobPortal.Core.Constants
 		public const int LOCATION_LEN = 50;
 
 		//Event 
-		public const int EVENT_NAME = 50;
+		public const int EVENT_NAME = 50 ;
 
 		//JobOffer
 		public const int JOBOFFER_POSITION = 50;
