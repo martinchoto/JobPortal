@@ -20,8 +20,6 @@ namespace JobPortal.ViewModels.Company
         [Required]
         [StringLength(DataConstants.JOBOFFER_BONUS)]
         public string Bonus { get; set; } = null!;
-        [Required]
-        public string UserId { get; set; } = null!;
         [Required(ErrorMessage = "Please select a type!")]
         public int TypeId { get; set; }
         public List<TypesViewModel> Types { get; set; } = new List<TypesViewModel>();

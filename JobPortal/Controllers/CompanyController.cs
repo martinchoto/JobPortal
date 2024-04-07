@@ -80,8 +80,8 @@ namespace JobPortal.Controllers
 			}
             if (!ModelState.IsValid)
             {
+				viewModel.Types = await _companyService.GetTypes();
                 return View(viewModel);
-
             }
             await _companyService.EditJobOfferAsync(viewModel, id);
 

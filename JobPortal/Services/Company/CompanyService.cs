@@ -82,7 +82,7 @@ namespace JobPortal.Services.Company
 				VacationDays = edited.VacationDays,
 				Types = types,
 				TypeId = edited.TypeId,
-				Bonus = edited.Bonus
+				Bonus = edited.Bonus,
 			};
 		}
 		public async Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id)
