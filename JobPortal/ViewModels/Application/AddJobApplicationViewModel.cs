@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JobPortal.Core.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.ViewModels.Application
 {
@@ -6,13 +7,16 @@ namespace JobPortal.ViewModels.Application
 	{
 		[Required]
 		[Display(Name = "Application Name")]
-		public string ApplicationName { get; set; } = null!;
+        [StringLength(DataConstants.APP_NAME)]
+        public string ApplicationName { get; set; } = null!;
 		[Required]
 		[Display(Name = "Full Name")]
-		public string FullName { get; set; } = null!;
+        [StringLength(DataConstants.APP_FULLNAME)]
+        public string FullName { get; set; } = null!;
 		[Required]
 		[EmailAddress]
-		public string Email { get; set; } = null!;
+        [StringLength(DataConstants.APP_EMAIL)]
+        public string Email { get; set; } = null!;
 		[Required]
 		public string Description { get; set; } = null!;
 		[Required]

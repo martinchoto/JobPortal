@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JobPortal.Core.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.ViewModels.Event
 {
 	public class AddEventViewModel
 	{
 		[Required]
-		public string Name { get; set; } = null!;
+        [StringLength(DataConstants.EVENT_NAME)]
+        public string Name { get; set; } = null!;
 		[Required]
 		public string ImageUrl { get; set; } = null!;
 		[Required]

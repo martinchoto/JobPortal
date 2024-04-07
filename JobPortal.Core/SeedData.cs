@@ -5,21 +5,15 @@ namespace JobPortal.Core
 {
 	public class SeedData
 	{
-		public IEnumerable<Company> SeedCompanies()
+		public Company FirstCompany = new Company()
 		{
-			Company[] companies = new Company[1];
-			companies[0] = new Company()
-			{
-				Id = 1,
-				UserId = "b5b0f315-98eb-4078-bf80-a329869ad392",
-				Address = "ul. Aleksander Stamboliiski",
-				Location = "Pazardjik",
-				CompanyName = "Billa",
-				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png"
-			};
-
-			return companies;
-		}
+            Id = 1,
+            UserId = "b5b0f315-98eb-4078-bf80-a329869ad392",
+            Address = "ul. Aleksander Stamboliiski",
+            Location = "Pazardjik",
+            CompanyName = "Billa",
+            LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png"
+        };
 
 		public IEnumerable<Type> SeedTypes()
 		{

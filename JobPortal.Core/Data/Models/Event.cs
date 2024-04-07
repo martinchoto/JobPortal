@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JobPortal.Core.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,7 @@ namespace JobPortal.Core.Data.Models
 		[Key]
 		public int Id { get; set; }
 		[Required]
+		[StringLength(DataConstants.EVENT_NAME)]
 		public string Name { get; set; } = null!;
 		[Required]
 		public string Description { get; set; } = null!;

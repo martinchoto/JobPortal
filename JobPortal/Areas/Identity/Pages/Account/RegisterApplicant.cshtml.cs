@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using JobPortal.Core.Constants;
 using JobPortal.Core.Data.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -41,9 +42,11 @@ namespace JobPortal.Areas.Identity.Pages.Account
             public string Username { get; set; }
             [Required]
             [Display(Name = "First name")]
+            [StringLength(DataConstants.USER_FIRST)]
             public string FirstName { get; set; } = null!;
             [Required]
             [Display(Name = "Last name")]
+            [StringLength(DataConstants.USER_LAST)]
             public string LastName { get; set; } = null!;
             [Required]
             [EmailAddress]

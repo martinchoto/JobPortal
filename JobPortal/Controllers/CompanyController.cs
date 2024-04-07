@@ -43,7 +43,12 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			await _companyService.AddJobOfferAsync(viewModel, company.Id);
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+
+            }
+            await _companyService.AddJobOfferAsync(viewModel, company.Id);
 			return RedirectToAction(nameof(All), "Company");
 		}
 		[HttpGet]
@@ -58,7 +63,6 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
-
 			AddJobOfferViewModel viewModel = await _companyService.BuildEditViewModel(id);
 			return View(viewModel);
 		}
@@ -74,7 +78,12 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
-			await _companyService.EditJobOfferAsync(viewModel, id);
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+
+            }
+            await _companyService.EditJobOfferAsync(viewModel, id);
 
 			return RedirectToAction(nameof(All), "Company");
 		}

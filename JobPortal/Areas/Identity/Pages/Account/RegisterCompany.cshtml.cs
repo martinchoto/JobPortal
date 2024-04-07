@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using JobPortal.Core.Constants;
 using JobPortal.Core.Data;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
@@ -77,12 +78,15 @@ namespace JobPortal.Areas.Identity.Pages.Account
 
 			[Required]
 			[Display(Name = "Company name")]
+			[StringLength(DataConstants.COMPANY_LEN)]
 			public string CompanyName { get; set; }
 			[Required]
 			[Display(Name = "Address")]
-			public string Address { get; set; }
+            [StringLength(DataConstants.ADDRESS_LEN)]
+            public string Address { get; set; }
 			[Required]
-			public string Location { get; set; }
+            [StringLength(DataConstants.LOCATION_LEN)]
+            public string Location { get; set; }
 			[Required]
 			public string LogoUrl { get; set; }
 

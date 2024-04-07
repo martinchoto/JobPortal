@@ -140,6 +140,10 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 			await _eventService.EditEventAsync(e, viewModel);
 			return RedirectToAction(nameof(All), "Event");
 		}

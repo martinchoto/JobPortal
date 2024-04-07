@@ -1,4 +1,5 @@
-﻿using JobPortal.Core.Data.Identity;
+﻿using JobPortal.Core.Constants;
+using JobPortal.Core.Data.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,18 +10,18 @@ namespace JobPortal.Core.Data.Models
 		[Key]
 		public int Id { get; set; }
 		[Required]
-		[StringLength(50)]
+		[StringLength(DataConstants.JOBOFFER_POSITION)]
 		public string Position { get; set; } = null!;
 		[Required]
-		[StringLength(50)]
-		public string Status { get; set; } = null!;
+        [StringLength(DataConstants.JOBOFFER_STATUS)]
+        public string Status { get; set; } = null!;
 		[Required]
 		public string Description { get; set; } = null!;
 		public decimal Salary { get; set; }
 		public int VacationDays { get; set; }
 		[Required]
-		[StringLength(50)]
-		public string Bonus { get; set; } = null!;
+        [StringLength(DataConstants.JOBOFFER_BONUS)]
+        public string Bonus { get; set; } = null!;
 		public DateTime PostedDate { get; set; }
 		[ForeignKey(nameof(Company))]
 		public int CompanyId { get; set; }
