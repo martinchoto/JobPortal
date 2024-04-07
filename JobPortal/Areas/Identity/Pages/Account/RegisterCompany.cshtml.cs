@@ -50,23 +50,11 @@ namespace JobPortal.Areas.Identity.Pages.Account
 			_dbContext = context;
 		}
 
-		/// <summary>
-		///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-		///     directly from your code. This API may change or be removed in future releases.
-		/// </summary>
 		[BindProperty]
 		public InputModel Input { get; set; }
 
-		/// <summary>
-		///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-		///     directly from your code. This API may change or be removed in future releases.
-		/// </summary>
 		public string ReturnUrl { get; set; }
 
-		/// <summary>
-		///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-		///     directly from your code. This API may change or be removed in future releases.
-		/// </summary>
 		public class InputModel
 		{
 			[Required]
@@ -82,11 +70,11 @@ namespace JobPortal.Areas.Identity.Pages.Account
 			public string CompanyName { get; set; }
 			[Required]
 			[Display(Name = "Address")]
-            [StringLength(DataConstants.ADDRESS_LEN)]
-            public string Address { get; set; }
+			[StringLength(DataConstants.ADDRESS_LEN)]
+			public string Address { get; set; }
 			[Required]
-            [StringLength(DataConstants.LOCATION_LEN)]
-            public string Location { get; set; }
+			[StringLength(DataConstants.LOCATION_LEN)]
+			public string Location { get; set; }
 			[Required]
 			public string LogoUrl { get; set; }
 
@@ -141,7 +129,14 @@ namespace JobPortal.Areas.Identity.Pages.Account
 
 					await _dbContext.Companies.AddAsync(company);
 					await _dbContext.SaveChangesAsync();
-					return LocalRedirect(returnUrl);
+					if (returnUrl != null)
+					{
+						return LocalRedirect(returnUrl);
+					}
+					else
+					{
+						return RedirectToAction("Index", "Home");
+					}
 
 				}
 				foreach (var error in result.Errors)
