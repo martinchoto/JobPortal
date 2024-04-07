@@ -14,10 +14,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<ICompanyService, CompanyService>();
-builder.Services.AddScoped<IJobService, JobService>();
-builder.Services.AddScoped<IApplicationService, ApplicationService>();
-builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddBussinessServices(builder.Configuration);
 
 var app = builder.Build();
 

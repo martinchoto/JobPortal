@@ -1,5 +1,9 @@
 ﻿using JobPortal.Core.Data;
 using JobPortal.Core.Data.Identity;
+using JobPortal.Services.Application;
+using JobPortal.Services.Company;
+using JobPortal.Services.Event;
+using JobPortal.Services.Job;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +40,14 @@ namespace JobPortal.Extensions
 					.AddRoles<IdentityRole>()
 					.AddEntityFrameworkStores<JobPortalDbContext>();
 
+			return services;
+		}
+		public static IServiceCollection AddBussinessServices(this IServiceCollection services, IConfiguration config)
+		{
+			services.AddScoped<ICompanyService, CompanyService>();
+			services.AddScoped<IJobService, JobService>();
+			services.AddScoped<IApplicationService, ApplicationService>();
+			services.AddScoped<IEventService, EventService>();
 			return services;
 		}
 	}
