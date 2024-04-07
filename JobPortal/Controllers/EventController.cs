@@ -89,7 +89,7 @@ namespace JobPortal.Controllers
 			await _eventService.LeaveEvent(ep);
 			return RedirectToAction(nameof(Joined), "Event");
 		}
-		[Authorize(Roles = "Company")]
+		[Authorize(Roles = "Company,Admin")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			Event e = await _eventService.GetEventAsync(id);
@@ -97,14 +97,14 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (e.Company.UserId != GetUserId())
+			if (e.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
 			await _eventService.RemoveEvent(e);
 			return RedirectToAction(nameof(All), "Event");
 		}
-		[Authorize(Roles = "Company")]
+		[Authorize(Roles = "Company,Admin")]
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
@@ -113,7 +113,7 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (e.Company.UserId != GetUserId())
+			if (e.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
@@ -127,7 +127,7 @@ namespace JobPortal.Controllers
 			return View(editViewModel);
 
 		}
-		[Authorize(Roles = "Company")]
+		[Authorize(Roles = "Company,Admin")]
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, AddEventViewModel viewModel)
 		{
@@ -136,7 +136,7 @@ namespace JobPortal.Controllers
 			{
 				return BadRequest();
 			}
-			if (e.Company.UserId != GetUserId())
+			if (e.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}

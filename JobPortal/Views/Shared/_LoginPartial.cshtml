@@ -17,7 +17,7 @@
 				<a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@user?.UserName</a>
 			</li>
 		}
-		else if (User.IsInRole("Applicant"))
+		else if (User.IsInRole("Applicant") || User.IsInRole("Admin"))
 		{
 			<li class="nav-item">
 				<a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@user?.FirstName</a>

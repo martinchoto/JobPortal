@@ -31,7 +31,7 @@
 								</li>
 
 							}
-							@if (User.IsInRole("Company") || User.IsInRole("Applicant"))
+							@if (User.IsInRole("Company") || User.IsInRole("Applicant") || User.IsInRole("Admin"))
 							{
 
 								<li class="nav-item">
@@ -51,6 +51,12 @@
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" asp-controller="Job" asp-action="AllCompanies" asp-area="">All companies</a>
+								</li>
+							}
+							@if (User.IsInRole("Admin"))
+							{
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Admin" asp-action="Users" asp-area="">Users</a>
 								</li>
 							}
 
