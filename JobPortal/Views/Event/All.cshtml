@@ -1,0 +1,30 @@
+﻿@model List<AllEventsViewModel>
+@inject UserManager<AppUser> UserManager
+@{
+	ViewData["Title"] = "All Events";
+	var user = await UserManager.GetUserAsync(User);
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<div class="text-center row">
+	@foreach (var e in Model)
+	{
+		<div class="card col-2 g-3 mx-3" style="width: 25rem; ">
+			<div class="card-body">
+				<img class="mb-3 w-100" style="width: 15rem;" src="@e.ImageUrl" />
+				<p>Name: @e.Name</p>
+				<p>Date: @e.Date</p>
+				@if (user.Id == e.OwnerId)
+				{
+					<a asp-controller="Event" asp-action="Edit" asp-route-id="@e.Id"
+					   class="btn btn-warning w-100 mb-2 w-75 p-3 fw-bold">Edit</a>
+					<a asp-controller="Event" asp-action="Delete" asp-route-id="@e.Id"
+					   class="btn btn-danger w-100 mb-2 w-75 p-3 fw-bold">Delete</a>
+				}
+				<a asp-controller="Event" asp-action="Details" asp-route-id="@e.Id"
+				   class="btn btn-light w-100 mb-2 w-100 p-3 fw-bold">Details</a>
+			</div>
+		</div>
+	}
+
+</div>

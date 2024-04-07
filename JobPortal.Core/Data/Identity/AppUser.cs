@@ -8,6 +8,7 @@ namespace JobPortal.Core.Data.Identity
 	{
 		public string? FirstName { get; set; }
 		public string? LastName { get; set; }
+		public DateTime CreatedOn {  get; set; }
 		public virtual List<JobApplication> Applications { get; set; } = new List<JobApplication>();
 		public virtual List<EventParticipants> EventParticipants { get; set; } = new List<EventParticipants>();
 	}

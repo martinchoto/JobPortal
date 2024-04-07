@@ -1,6 +1,7 @@
 using JobPortal.Extensions;
 using JobPortal.Services.Application;
 using JobPortal.Services.Company;
+using JobPortal.Services.Event;
 using JobPortal.Services.Job;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 

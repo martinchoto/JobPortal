@@ -9,7 +9,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-lg bg-primary mb-lg-3" data-bs-theme="dark">
+		<nav class="navbar navbar-expand-lg bg-light mb-lg-3" data-bs-theme="light">
 			<div class="container">
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
@@ -27,7 +27,7 @@
 									<a class="nav-link" asp-controller="Company" asp-action="Add" asp-area="">Add Offer</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" asp-controller="Company" asp-action="Add" asp-area="">Create Event</a>
+									<a class="nav-link" asp-controller="Event" asp-action="Add" asp-area="">Create Event</a>
 								</li>
 
 							}
@@ -35,13 +35,13 @@
 							{
 
 								<li class="nav-item">
-									<a class="nav-link" asp-controller="Application" asp-action="Mine" asp-area="">Events</a>
+									<a class="nav-link" asp-controller="Event" asp-action="All" asp-area="">Events</a>
 								</li>
 							}
 							@if (User.IsInRole("Applicant"))
 							{
 								<li class="nav-item">
-									<a class="nav-link" asp-controller="Job" asp-action="AllCompanies" asp-area="">Joined Events</a>
+									<a class="nav-link" asp-controller="Event" asp-action="Joined" asp-area="">Joined Events</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" asp-controller="Application" asp-action="Mine" asp-area="">My Applications</a>
@@ -55,7 +55,12 @@
 							}
 
 						}
-
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="">Home</a>
+							</li>
+						}
 					</ul>
 					<partial name="_LoginPartial" />
 				</div>

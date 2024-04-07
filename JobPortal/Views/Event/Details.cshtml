@@ -1,0 +1,17 @@
+﻿@model EventDetailsViewModel
+@{
+	ViewBag.Title = "Details";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="text-center">
+	<img class="mb-3" style="width: 35rem;" src="@Model.ImageUrl" />
+	<h4 class="mb-3">@Model.Name</h4>
+	<h4 class="mb-3">@Model.Description</h4>
+	<p class="mb-3">@Model.DateTime</p>
+	@if (User.IsInRole("Applicant"))
+	{
+		<a asp-route-id="@Model.Id" asp-controller="Event" class="btn btn-primary mb-2 p-3 fw-bold"
+		asp-action="Join">Join</a>
+	}
+</div>

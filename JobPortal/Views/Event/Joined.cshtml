@@ -1,0 +1,24 @@
+﻿@model List<AllEventsViewModel>
+@{
+	ViewData["Title"] = "Joined Events";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<div class="text-center row">
+	@foreach (var e in Model)
+	{
+		<div class="card col-2 g-3 mx-3" style="width: 25rem; ">
+			<div class="card-body">
+				<img class="mb-3 w-100" style="width: 15rem;" src="@e.ImageUrl" />
+				<p>Name: @e.Name</p>
+				<p>Date: @e.Date</p>
+
+				<a asp-controller="Event" asp-action="Leave" asp-route-id="@e.Id"
+				   class="btn btn-danger w-100 mb-2 w-100 p-3 fw-bold">Leave</a>
+
+			</div>
+		</div>
+	}
+
+</div>
+

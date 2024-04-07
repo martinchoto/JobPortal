@@ -1,0 +1,29 @@
+﻿@using System.Globalization
+@model List<AppUser>
+@{
+    ViewData["Title"] = "Users";
+}
+<h2 class="text-center mb-3">@ViewData["Title"]</h2>
+<hr />
+<table class="table text-center table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td scope="row">@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.CreatedOn.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)</td>
+                <td><a asp-route-id="@user.Id" asp-action="DeleteUser" 
+                    class="btn btn-danger p-3 fw-bold">Ban</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

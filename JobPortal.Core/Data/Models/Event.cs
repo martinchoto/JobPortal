@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobPortal.Core.Data.Models
 {
@@ -17,6 +14,8 @@ namespace JobPortal.Core.Data.Models
 		[Required]
 		public string Description { get; set; } = null!;
 		public DateTime Date { get; set; }
+		[Required]
+		public string ImageUrl { get; set; } = null!;
 		[ForeignKey(nameof(Company))]
 		public int CompanyId { get; set; }
 		public virtual Company Company { get; set; } = null!;

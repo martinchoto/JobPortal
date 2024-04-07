@@ -1,0 +1,42 @@
+﻿@model AddEventViewModel
+@{
+	ViewData["Title"] = "Add event";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+	<div class="col-md-4 mx-auto text-center">
+		<form asp-action="Add" method="post">
+			<div class="mb-3">
+				<label asp-for="@Model.Name" class="mb-3">Name</label>
+				<input asp-for="@Model.Name" class="form-control" aria-required="true" />
+				<span asp-validation-for="@Model.Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.ImageUrl" class="mb-3">ImageUrl</label>
+				<input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
+				<span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Date" class="mb-3">Start Date</label>
+				<input asp-for="@Model.Date" class="form-control" aria-required="true" value="@DateTime.Now" type="datetime-local" />
+				<span asp-validation-for="@Model.Date" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.Description" class="mb-3">Description</label>
+				<textarea asp-for="@Model.Description" rows="4" class="form-control" style="resize: none;" aria-required="true" asp-for="Description"></textarea>
+				<span asp-validation-for="@Model.Description" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-info px-5 py-3 rounded-2">
+					Submit
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
