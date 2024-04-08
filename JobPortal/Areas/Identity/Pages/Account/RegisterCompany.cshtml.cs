@@ -123,7 +123,7 @@ namespace JobPortal.Areas.Identity.Pages.Account
 						LogoUrl = Input.LogoUrl,
 						Location = Input.Location,
 						Address = Input.Address,
-						UserId = user.Id
+						UserId = user.Id.ToString(),
 					};
 					await _userManager.AddToRoleAsync(user, "Company");
 

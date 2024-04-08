@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobPortal.Core.Data.Identity
 {
-	public class AppUser : IdentityUser
+	public class AppUser : IdentityUser<string>
 	{
         [StringLength(DataConstants.USER_FIRST)]
         public string? FirstName { get; set; }

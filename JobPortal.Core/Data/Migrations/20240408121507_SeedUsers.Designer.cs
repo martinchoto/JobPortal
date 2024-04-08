@@ -4,6 +4,7 @@ using JobPortal.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Job_Portal.Data.Migrations
 {
     [DbContext(typeof(JobPortalDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408121507_SeedUsers")]
+    partial class SeedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,35 +60,6 @@ namespace Job_Portal.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "ul. Aleksander Stamboliiski",
-                            CompanyName = "Billa",
-                            Location = "Pazardjik",
-                            LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png",
-                            UserId = "b5b0f315-98eb-4078-bf80-a329869ad392"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "ul. Iordan Iosifov",
-                            CompanyName = "Lidl",
-                            Location = "Sofia",
-                            LogoUrl = "https://w7.pngwing.com/pngs/106/455/png-transparent-yellow-red-and-blue-lidl-logo-lidl-logo-retail-supermarket-toru%C5%84-lidl-food-text-business.png",
-                            UserId = "ba20f920-1a04-4d5b-8a7f-f0b0a328169d"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "bul. Tsarigradsko Shose",
-                            CompanyName = "Bosch",
-                            Location = "Sofia",
-                            LogoUrl = "https://banner2.cleanpng.com/20180804/loj/kisspng-logo-robert-bosch-gmbh-alternator-product-electric-adelaide-laser-calibration-service-repair-amp-5b659ac12b5114.3730089015333854091774.jpg",
-                            UserId = "ca27630c-7fa9-4d54-b8f1-851252abc519"
-                        });
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.Event", b =>
@@ -523,69 +496,69 @@ namespace Job_Portal.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "11d42cfa-0eb5-4556-bbee-452d66efacf8",
+                            Id = "5f9799fb-f83d-442c-8af4-833b0858b628",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d98bcaac-4e3f-453e-82b8-a687b2b65008",
+                            ConcurrencyStamp = "7d95b18c-1b40-495e-9516-76baa71392b4",
                             Email = "martoadmin@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "martoadmin@abv.bg",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMyDYyUo0nuUu5oAFGZqhWB0gdhIYM2HX/VEBDN8atT0tec0RgyMOwfsii9X5gmYaw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMihDMCquX4Eh097cAigApx+dUv7xqVh5+ZhzUg6HTNBdbSt+C+PQbIxrvweyQQDUg==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "admin",
-                            CreatedOn = new DateTime(2024, 4, 8, 15, 23, 32, 392, DateTimeKind.Local).AddTicks(2698),
+                            CreatedOn = new DateTime(2024, 4, 8, 15, 15, 7, 372, DateTimeKind.Local).AddTicks(5746),
                             FirstName = "Martin",
                             LastName = "Stalev"
                         },
                         new
                         {
-                            Id = "ba20f920-1a04-4d5b-8a7f-f0b0a328169d",
+                            Id = "67664bad-6599-4849-8666-bed16a8eb7b8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "239a0862-70b6-4b87-b470-7d076a28c4d0",
+                            ConcurrencyStamp = "65af57a7-5820-4100-8aee-d5cc3eb7a616",
                             Email = "lidlbg@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "LIDLBG@ABV.BG",
                             NormalizedUserName = "LIDLBG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF+22ejI+C/hA6kFtQFJ7+fq93V+FaNGXXgpFS2xfDoPQ1JmjKQLcEZYh2aRwL8tfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECOx7qmEPZU1eLAnKIewjRye+QagPZqNKEEzmfkRFl+KTRJXDAIqspVEKsDf9HgKcA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "lidlbg",
-                            CreatedOn = new DateTime(2024, 4, 8, 15, 23, 32, 393, DateTimeKind.Local).AddTicks(6797)
+                            CreatedOn = new DateTime(2024, 4, 8, 15, 15, 7, 373, DateTimeKind.Local).AddTicks(8155)
                         },
                         new
                         {
-                            Id = "ca27630c-7fa9-4d54-b8f1-851252abc519",
+                            Id = "8190d96f-16a5-447d-ad93-cddcbe8ae5f0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4e756fa-1805-4ff3-8c08-a6fd11217454",
+                            ConcurrencyStamp = "9b971e98-a6db-40b3-a8c3-04f87927fd2c",
                             Email = "boschbg@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BOSCHBG@ABV.BG",
                             NormalizedUserName = "BOSCHBG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMECG3AtT1pqzRZ+hJCrG3SO8AWCXXdAAvQIBOxyugugFNLzWRikxPFTjzV57E7lhg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDprYX9tJ+dG9JUng3Xb3AA5JPW1I7+UQ5t4GW8RKV5jlxLBlC8By3q3TsliLn/z5g==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "boschbg",
-                            CreatedOn = new DateTime(2024, 4, 8, 15, 23, 32, 395, DateTimeKind.Local).AddTicks(933)
+                            CreatedOn = new DateTime(2024, 4, 8, 15, 15, 7, 375, DateTimeKind.Local).AddTicks(54)
                         },
                         new
                         {
-                            Id = "018bff8a-5df3-40d8-8a65-e6a5e932f957",
+                            Id = "07da9f74-ea66-4909-8374-fb770efb383b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "86df21de-a7bc-4370-b6a8-1ae7e8ed428f",
+                            ConcurrencyStamp = "25781a97-d718-4258-9d9a-23c41a5f9a1b",
                             Email = "martoplays@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "MARTOPLAYS@ABV.BG",
                             NormalizedUserName = "MARTINCHOTO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDJZR0sWoPlWHAKdfwtyqDydPu8H/c9KcyhHFlYjfWEu3EA8WHZUUhXZ0YyuJf8e4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK0JSf3bHn/m4rSKD7sNdVJDKvEtddfmbN8qQFjsQUA6yyyxSI+axp6wUfLS7Ld7NQ==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "martinchoto",
-                            CreatedOn = new DateTime(2024, 4, 8, 15, 23, 32, 396, DateTimeKind.Local).AddTicks(4179),
+                            CreatedOn = new DateTime(2024, 4, 8, 15, 15, 7, 376, DateTimeKind.Local).AddTicks(1884),
                             FirstName = "Martinkata",
                             LastName = "Voivodov"
                         });
