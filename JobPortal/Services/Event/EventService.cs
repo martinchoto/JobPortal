@@ -76,7 +76,10 @@
 				Name = e.Name,
 				DateTime = e.Date.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 				ImageUrl = e.ImageUrl,
-				Description = e.Description
+				Description = e.Description,
+				Location = e.Company.Location,
+				Address = e.Company.Address,
+				CompanyName = e.Company.CompanyName
 			};
 		}
 

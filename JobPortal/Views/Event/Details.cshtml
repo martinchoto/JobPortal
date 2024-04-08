@@ -9,6 +9,9 @@
 	<h4 class="mb-3">@Model.Name</h4>
 	<h4 class="mb-3">@Model.Description</h4>
 	<p class="mb-3">@Model.DateTime</p>
+	<p class="mb-3">@Model.CompanyName</p>
+	<p class="mb-3">@Model.Location</p>
+	<p class="mb-3">@Model.Address</p>
 	@if (User.IsInRole("Applicant"))
 	{
 		<a asp-route-id="@Model.Id" asp-controller="Event" class="btn btn-primary mb-2 p-3 fw-bold"
