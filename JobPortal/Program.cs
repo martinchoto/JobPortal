@@ -1,8 +1,5 @@
 using JobPortal.Extensions;
-using JobPortal.Services.Application;
-using JobPortal.Services.Company;
-using JobPortal.Services.Event;
-using JobPortal.Services.Job;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,16 +13,20 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddBussinessServices(builder.Configuration);
 
+builder.Services.AddCors();
+builder.Services.AddMvc(options =>
+ options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+	app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+	app.UseExceptionHandler("/Error");
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -36,7 +37,21 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		name: "Details",
+		pattern: "/{controller}/Details/{id}/{info}",
+		defaults: new { Action = "Details" });
+
+	endpoints.MapControllerRoute(
+		name: "All Offers",
+		pattern: "/Job/AllOffers/{id}/{info}",
+		defaults: new { Controller = "Job", Action = "AllOffers" });
+
+	endpoints.MapDefaultControllerRoute();
+	endpoints.MapRazorPages();
+});
+
 
 app.Run();

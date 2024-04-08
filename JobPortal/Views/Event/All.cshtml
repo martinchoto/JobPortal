@@ -22,7 +22,7 @@
 					<a asp-controller="Event" asp-action="Delete" asp-route-id="@e.Id"
 					   class="btn btn-danger w-100 mb-2 w-75 p-3 fw-bold">Delete</a>
 				}
-				<a asp-controller="Event" asp-action="Details" asp-route-id="@e.Id"
+				<a asp-controller="Event" asp-action="Details" asp-route-info="@e.GetInfo()" asp-route-id="@e.Id"
 				   class="btn btn-light w-100 mb-2 w-100 p-3 fw-bold">Details</a>
 			</div>
 		</div>

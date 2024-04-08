@@ -11,7 +11,7 @@
 			<div class="card-body">
 				<img style="width: 15rem;" src="@e.ImageUrl" />
 				<h5 class="card-title mt-1 mb-3">@e.Name</h5>
-				<a asp-controller="Job" asp-action="AllOffers" 
+				<a asp-controller="Job" asp-action="AllOffers" asp-route-info="@e.GetInfo()"
 				asp-route-id="@e.Id" class="btn btn-light mb-2 w-100 p-3 fw-bold">View job offers</a>
 			</div>
 		</div>

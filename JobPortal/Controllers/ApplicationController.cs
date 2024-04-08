@@ -109,12 +109,16 @@ namespace JobPortal.Controllers
 			await _applicationService.DeleteApplicationAsync(application);
 			return RedirectToAction(nameof(Mine), "Application");
 		}
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int id, string info)
 		{
 			JobApplication jobApp = await _applicationService.GetApplication(id);
 			if (jobApp == null)
 			{
 				return BadRequest();
+			}
+			if (jobApp.UserId != GetUserId() && jobApp.JobOfferApplications.FirstOrDefault(x => x.JobOffer.Company.UserId == GetUserId()) == null)
+			{
+				return Unauthorized();
 			}
 			DetailsApplicationViewModel model = await _applicationService.BuildDetailsViewModelAsync(jobApp);
 			return View(model);

@@ -21,7 +21,7 @@ namespace JobPortal.Controllers
 			List<JobOffersViewModel> jobs = await _jobService.AllJobsAsync();
 			return View(jobs);
 		}
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int id, string info)
 		{
 			JobOffer job = await _jobService.FindJobAsync(id);
 			if (job == null)

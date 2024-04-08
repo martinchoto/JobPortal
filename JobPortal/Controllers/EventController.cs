@@ -45,7 +45,7 @@ namespace JobPortal.Controllers
 			await _eventService.AddEventAsync(company.Id, viewModel);
 			return RedirectToAction(nameof(All), "Event");
 		}
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int id, string info)
 		{
 			Event e = await _eventService.GetEventAsync(id);
 

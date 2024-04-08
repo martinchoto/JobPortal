@@ -25,7 +25,8 @@ namespace JobPortal.Services.Job
 					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
 					VacationDays = x.VacationDays,
 					ImageUrl = x.Company.LogoUrl,
-					Type = x.Type.Name
+					Type = x.Type.Name,
+					CompanyName = x.Company.CompanyName
 				})
 				.ToListAsync();
 			return jobs;
@@ -115,7 +116,8 @@ namespace JobPortal.Services.Job
 					Position = x.Position,
 					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
 					Status = x.Status,
-					Type = x.Type.Name
+					Type = x.Type.Name,
+					CompanyName = x.Company.CompanyName
 				})
 				.ToListAsync();
 		}

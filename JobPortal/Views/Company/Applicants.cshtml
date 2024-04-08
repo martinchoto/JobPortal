@@ -4,24 +4,33 @@
 }
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
-@foreach (var e in Model)
+@if (Model.Any())
 {
-	<div class="row bg-light p-4 text-center">
-	<div class="col-md-4">
-		<p>Application Name</p>
-		<p>@e.Name<p>
-	</div>
-	<div class="col-md-4">
-		<p>Last Updated On</p>
-		<p>@e.CreatedOn</p>
-	</div>
-	<div class="col-md-4 justify-content-center">
-		<a asp-controller="Application" asp-route-id="@e.Id" asp-action="Details" class="btn btn-info mb-2 w-25">Details</a>
-		<br />
-		<a asp-controller="Company" asp-route-id="@e.Id" asp-action="DeleteApplication" class="btn btn-danger mb-2 w-25">Delete</a>
-	</div>
-	<hr class="text-dark" />
-</div>
+	@foreach (var e in Model)
+	{
+		<div class="row bg-light p-4 text-center">
+			<div class="col-md-4">
+				<p>Application Name</p>
+				<p>@e.Name<p>
+			</div>
+			<div class="col-md-4">
+				<p>Last Updated On</p>
+				<p>@e.CreatedOn</p>
+			</div>
+			<div class="col-md-4 justify-content-center">
+				<a asp-controller="Application" asp-route-id="@e.Id" asp-route-info="@e.GetInfo()"
+				asp-action="Details" class="btn btn-info mb-2 w-25">Details</a>
+				<br />
+				<a asp-controller="Company" asp-route-id="@e.Id" asp-action="DeleteApplication" class="btn btn-danger mb-2 w-25">Delete</a>
+			</div>
+			<hr class="text-dark" />
+		</div>
+	}
+
+}
+else
+{
+	<h3 class="text-center">You have no applicants :(</h3>
 }
 
 

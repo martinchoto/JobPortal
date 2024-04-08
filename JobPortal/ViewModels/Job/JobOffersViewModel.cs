@@ -9,5 +9,13 @@
 		public int VacationDays { get; set; }
 		public string ImageUrl { get; set; } = null!;
 		public string Type { get; set; } = null!;
+		public string CompanyName { get; set; } = null!;
+		public string GetInformation()
+		{
+			Position = Position.Replace(" ", "-").ToLower();
+			CompanyName = CompanyName.Replace(" ", "-").ToLower();
+			Type = Type.Replace(" ", "-").ToLower();
+			return $"{CompanyName}-{Position}-{Type}";
+		}
 	}
 }
