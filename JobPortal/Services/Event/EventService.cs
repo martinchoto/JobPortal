@@ -58,7 +58,8 @@
 					Name = e.Name,
 					Date = e.Date.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 					ImageUrl = e.ImageUrl,
-					OwnerId = e.Company.UserId
+					OwnerId = e.Company.UserId,
+					CompanyName = e.Company.CompanyName
 				})
 				.ToListAsync();
 		}
@@ -110,6 +111,7 @@
 					Name = e.Event.Name,
 					Date = e.Event.Date.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 					ImageUrl = e.Event.ImageUrl,
+					CompanyName = e.Event.Company.CompanyName
 				})
 				.ToListAsync();
 		}

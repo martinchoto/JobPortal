@@ -22,7 +22,7 @@
 		<label>Type</label>
 		<p>@Model.Type</p>
 		<div class="text-center">
-			@if ((user.Id == Model.UserId && User.IsInRole("Company")) || User.IsInRole("Admin"))
+			@if (user.Id == Model.UserId && User.IsInRole("Company"))
 			{
 				<a asp-controller="Company" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-75 p-3 fw-bold">Edit</a>
 				<a asp-controller="Company" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-75 p-3 fw-bold">Delete</a>

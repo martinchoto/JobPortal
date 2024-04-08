@@ -251,7 +251,7 @@ namespace JobPortal.Core
 			{
 				Id = 4,
 				Status = "fulltime 8hrs/day",
-				Position = "Cleaner",
+				Position = "Cashier",
 				Salary = 1400M,
 				Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
 				Bonus = "Whole a lot of benefits working for a big company",
@@ -264,7 +264,7 @@ namespace JobPortal.Core
 			{
 				Id = 5,
 				Status = "fulltime 8hrs/day",
-				Position = "Cleaner",
+				Position = "Cleaner for tiles",
 				Salary = 1400M,
 				Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
 				Bonus = "Whole a lot of benefits working for a big company",
@@ -277,7 +277,7 @@ namespace JobPortal.Core
 			{
 				Id = 6,
 				Status = "fulltime 8hrs/day",
-				Position = "Cleaner",
+				Position = "Cleaner for toilets",
 				Salary = 1400M,
 				Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
 				Bonus = "Whole a lot of benefits working for a big company",
@@ -303,7 +303,7 @@ namespace JobPortal.Core
 			{
 				Id = 8,
 				Status = "fulltime 8hrs/day",
-				Position = "Web Dev",
+				Position = "Web Eng",
 				Salary = 1400M,
 				Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
 				Bonus = "Whole a lot of benefits working for a big company",

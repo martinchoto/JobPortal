@@ -56,7 +56,7 @@ namespace JobPortal.Services.Job
 				LastUpdatedOn = job.PostedDate.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 				Type = job.Type.Name,
 				Applications = await GetAllApplicationsAsync(userId),
-				UserId = userId,
+				UserId = job.Company.UserId
 			};
 			return jobViewModel;
 		}
