@@ -1,4 +1,5 @@
-﻿using JobPortal.Core;
+﻿using Job_Portal.Data.Migrations;
+using JobPortal.Core;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,7 @@ using Type = JobPortal.Core.Data.Models.Type;
 
 namespace JobPortal.Core.Data
 {
-	public class JobPortalDbContext : IdentityDbContext<IdentityUser<string>, IdentityRole<string>, string>
+	public class JobPortalDbContext : IdentityDbContext<AppUser>
 	{
 		private readonly SeedData seedData;
 
@@ -33,15 +34,8 @@ namespace JobPortal.Core.Data
 		}
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+			SeedData(builder);
 			base.OnModelCreating(builder);
-
-			builder.Entity<Type>()
-				.HasData(seedData.SeedTypes());
-			builder.Entity<AppUser>()
-				.HasData(seedData.SeedUsers());
-			builder.Entity<Company>()
-				.HasData(seedData.SeedCompanies());
-
 
 			builder.Entity<JobOfferApplication>()
 				.HasKey(pk => new { pk.JobOfferId, pk.ApplicationId });
@@ -72,6 +66,15 @@ namespace JobPortal.Core.Data
 				.WithMany(e => e.EventParticipants)
 				.HasForeignKey(fk => fk.ParticipantId).
 				OnDelete(DeleteBehavior.Restrict);
+		}
+		private void SeedData(ModelBuilder builder)
+		{
+			builder.Entity<Type>()
+				.HasData(seedData.SeedTypes());
+			builder.Entity<AppUser>()
+				.HasData(seedData.SeedUsers());
+			builder.Entity<Company>()
+				.HasData(seedData.SeedCompanies());
 		}
 	}
 }
