@@ -35,6 +35,7 @@ namespace JobPortal.Core.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			SeedData(builder);
+
 			base.OnModelCreating(builder);
 
 			builder.Entity<JobOfferApplication>()
@@ -75,6 +76,12 @@ namespace JobPortal.Core.Data
 				.HasData(seedData.SeedUsers());
 			builder.Entity<Company>()
 				.HasData(seedData.SeedCompanies());
+			builder.Entity<Event>()
+				.HasData(seedData.SeedEvent());
+			builder.Entity<JobApplication>()
+				.HasData(seedData.SeedApplications());
+			builder.Entity<JobOffer>()
+				.HasData(seedData.SeedOffers());
 		}
 	}
 }

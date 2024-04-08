@@ -4,6 +4,7 @@ using JobPortal.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Job_Portal.Data.Migrations
 {
     [DbContext(typeof(JobPortalDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408134143_SeededTheDb")]
+    partial class SeededTheDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,8 +104,8 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = "11d42cfa-0eb5-4556-bbee-452d66efacf8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "645a15c4-a361-46ff-9b86-f4937bd38364",
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 872, DateTimeKind.Local).AddTicks(4460),
+                            ConcurrencyStamp = "71339e33-782e-4bb0-8a83-11e56d9e486b",
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 988, DateTimeKind.Local).AddTicks(6430),
                             Email = "martoadmin@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "Martin",
@@ -111,9 +113,9 @@ namespace Job_Portal.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "martoadmin@abv.bg",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAZCPaaYzUqvyvO2zPsT6dfb1huPVxSOmyLIznaMHnA6jw8uspPYZWC0cD8rPgwzFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGqsATNpL83XCc2VetOqdjexGcsSlWO2WUl5JcpMhFiWlZ1lfIYiHQP4xZwOauuA0g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a79fb23e-1d4b-4796-abac-0d73238c3e29",
+                            SecurityStamp = "a7886813-4b29-455d-9a4b-eda28988194a",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -121,16 +123,16 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = "ba20f920-1a04-4d5b-8a7f-f0b0a328169d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3fa4ed2c-ea7e-4fa5-9f66-7f71078aa440",
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 873, DateTimeKind.Local).AddTicks(8027),
+                            ConcurrencyStamp = "bbce5d30-89f6-4c2e-9c68-f82a23dd0671",
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 989, DateTimeKind.Local).AddTicks(9170),
                             Email = "lidlbg@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "LIDLBG@ABV.BG",
                             NormalizedUserName = "LIDLBG",
-                            PasswordHash = "AQAAAAEAACcQAAAAENxzhGNLzsRA5r554m/i/Ld1c8OibPqoEOi4oI7Ebdw9qjIAGs6NEl5MdDKd9Y+mGQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOvi7e904qEaVWPw1RM8DfwHWjt4gpsabb/Kvw+VsZcBZZTQG2CQoyuBvGPyX62vTA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62a4061b-f210-4f4f-90c0-4c4149dbf6c1",
+                            SecurityStamp = "74764aad-7bb9-4cba-bccd-eb349bf3927a",
                             TwoFactorEnabled = false,
                             UserName = "lidlbg"
                         },
@@ -138,16 +140,16 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = "ca27630c-7fa9-4d54-b8f1-851252abc519",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed5af41b-047d-4db8-8aa3-833d39aac53a",
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 875, DateTimeKind.Local).AddTicks(1082),
+                            ConcurrencyStamp = "d0dce8cf-1eb2-4d5c-a18d-f2b1e4839035",
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 991, DateTimeKind.Local).AddTicks(1671),
                             Email = "boschbg@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BOSCHBG@ABV.BG",
                             NormalizedUserName = "BOSCHBG",
-                            PasswordHash = "AQAAAAEAACcQAAAAECYpIhFzQCIg33FLs2UFX2pZV3CdkkEtB2iEpSkbuzK34GCYnJ+vs55teyS1qzKBBg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBKgFO8oHXtoVr86rsFfxrDjSj5JwrZzIDBHrQUXeldZ2GxuGZl6MpZ2djjOBttJWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c7f8451a-fba4-4e09-b04f-db006152d847",
+                            SecurityStamp = "1c44c04c-f5d2-4d22-a46e-a343df00c5da",
                             TwoFactorEnabled = false,
                             UserName = "boschbg"
                         },
@@ -155,8 +157,8 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = "018bff8a-5df3-40d8-8a65-e6a5e932f957",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c88199f7-724f-414b-b4ba-4b06f4c30253",
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 876, DateTimeKind.Local).AddTicks(4176),
+                            ConcurrencyStamp = "6f02bae3-0afb-46fd-9487-cfd10236816d",
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 992, DateTimeKind.Local).AddTicks(4200),
                             Email = "martoplays@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "Martinkata",
@@ -164,9 +166,9 @@ namespace Job_Portal.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MARTOPLAYS@ABV.BG",
                             NormalizedUserName = "MARTINCHOTO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI0CJ7HCTKj9B/GvBDkUXXw1v4BzX3HM19DJk9k+e++5f4gh00FBWKc+CTLiHAlBCw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPofJMvlFS5bT6X1sYvms4+IogxuYHChlTfSF77wifOgO0K+qGp07lXBWbfI37F5/g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "459bc415-85c1-47c8-ab3b-dca3a3e8089f",
+                            SecurityStamp = "6fdbc56c-d00f-4d0c-8745-ae430122462e",
                             TwoFactorEnabled = false,
                             UserName = "martinchoto"
                         });
@@ -277,7 +279,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 1,
                             CompanyId = 1,
-                            Date = new DateTime(2024, 6, 7, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7142),
+                            Date = new DateTime(2024, 6, 7, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6831),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://espnpressroom.com/us/files/2023/06/Hot-Dog-Eating-Contest.png",
                             Name = "Eating Contest"
@@ -286,7 +288,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 2,
                             CompanyId = 1,
-                            Date = new DateTime(2024, 5, 18, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7146),
+                            Date = new DateTime(2024, 5, 18, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6834),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_sm/f_auto/primary/qpudtgofz5sw2ffcpz4j",
                             Name = "Shooting"
@@ -295,7 +297,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 3,
                             CompanyId = 2,
-                            Date = new DateTime(2024, 4, 28, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7148),
+                            Date = new DateTime(2024, 4, 28, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6836),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://t4.ftcdn.net/jpg/02/50/25/97/360_F_250259727_nY20L3aqydok59WVUbouUjw4wnAgJOix.jpg",
                             Name = "Day of the open doors"
@@ -304,7 +306,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 4,
                             CompanyId = 2,
-                            Date = new DateTime(2024, 4, 28, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7150),
+                            Date = new DateTime(2024, 4, 28, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6838),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://post.healthline.com/wp-content/uploads/2021/09/reading-book-1296x728-header.jpg",
                             Name = "Reading"
@@ -313,7 +315,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 5,
                             CompanyId = 3,
-                            Date = new DateTime(2024, 4, 12, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7152),
+                            Date = new DateTime(2024, 4, 12, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6839),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://t4.ftcdn.net/jpg/02/50/25/97/360_F_250259727_nY20L3aqydok59WVUbouUjw4wnAgJOix.jpg",
                             Name = "Day of the open doors"
@@ -322,7 +324,7 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 6,
                             CompanyId = 3,
-                            Date = new DateTime(2024, 5, 23, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7153),
+                            Date = new DateTime(2024, 5, 23, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6841),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             ImageUrl = "https://www.classcentral.com/report/wp-content/uploads/2022/03/Frame-3.png",
                             Name = "Programming course"
@@ -392,7 +394,7 @@ namespace Job_Portal.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7177),
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6856),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.",
                             Email = "martoplays@abv.bg",
                             FullName = "Martin Stalev",
@@ -403,7 +405,7 @@ namespace Job_Portal.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 8, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7181),
+                            CreatedOn = new DateTime(2024, 4, 8, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6859),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.",
                             Email = "martoplays@abv.bg",
                             FullName = "Martin Stalev",
@@ -471,7 +473,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 1,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Warehouse worker",
-                            PostedDate = new DateTime(2023, 5, 11, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7205),
+                            PostedDate = new DateTime(2023, 5, 11, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6876),
                             Salary = 1000m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 1,
@@ -484,7 +486,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 1,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Cashier",
-                            PostedDate = new DateTime(2023, 5, 11, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7209),
+                            PostedDate = new DateTime(2023, 5, 11, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6880),
                             Salary = 1200m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 6,
@@ -494,10 +496,10 @@ namespace Job_Portal.Data.Migrations
                         {
                             Id = 3,
                             Bonus = "Whole a lot of benefits working for a big company",
-                            CompanyId = 1,
+                            CompanyId = 2,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Cleaner",
-                            PostedDate = new DateTime(2023, 5, 11, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7211),
+                            PostedDate = new DateTime(2023, 5, 11, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6882),
                             Salary = 1400m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 6,
@@ -510,7 +512,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 2,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Cleaner",
-                            PostedDate = new DateTime(2024, 3, 6, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7213),
+                            PostedDate = new DateTime(2024, 3, 6, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6884),
                             Salary = 1400m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 6,
@@ -523,7 +525,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 2,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Cleaner",
-                            PostedDate = new DateTime(2024, 3, 6, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7215),
+                            PostedDate = new DateTime(2024, 3, 6, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6885),
                             Salary = 1400m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 6,
@@ -536,7 +538,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 2,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Cleaner",
-                            PostedDate = new DateTime(2024, 3, 6, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7217),
+                            PostedDate = new DateTime(2024, 3, 6, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6887),
                             Salary = 1400m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 6,
@@ -549,7 +551,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 3,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Web Designer",
-                            PostedDate = new DateTime(2024, 4, 5, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7219),
+                            PostedDate = new DateTime(2024, 4, 5, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6890),
                             Salary = 2200m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 1,
@@ -562,7 +564,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 3,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Web Dev",
-                            PostedDate = new DateTime(2024, 4, 5, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7221),
+                            PostedDate = new DateTime(2024, 4, 5, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6891),
                             Salary = 1400m,
                             Status = "fulltime 8hrs/day",
                             TypeId = 1,
@@ -575,7 +577,7 @@ namespace Job_Portal.Data.Migrations
                             CompanyId = 3,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper neque vel ligula dictum, vitae convallis justo gravida. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris consequat nisi et neque dapibus, sed vestibulum sapien fermentum. Fusce id justo euismod, posuere eros ac, suscipit felis. Sed consectetur enim id purus finibus.\r\n\r\n\r\n\r\n\r\n",
                             Position = "Web Dev",
-                            PostedDate = new DateTime(2024, 4, 5, 16, 43, 30, 877, DateTimeKind.Local).AddTicks(7223),
+                            PostedDate = new DateTime(2024, 4, 5, 16, 41, 42, 993, DateTimeKind.Local).AddTicks(6893),
                             Salary = 1400m,
                             Status = "fulltime 4hrs/day intern",
                             TypeId = 1,
