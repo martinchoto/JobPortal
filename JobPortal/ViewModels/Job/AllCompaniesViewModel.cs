@@ -7,7 +7,7 @@
 		public string ImageUrl { get; set; } = null!;
 		public string GetInfo()
 		{
-			Name = Name.Replace(" ", "-").ToLower();
+			Name = Name.Replace(" ", "-").ToLower().Trim();
 			return $"{Name}";
 		}
 	}
