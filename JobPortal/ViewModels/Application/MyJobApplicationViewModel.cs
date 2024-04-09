@@ -7,7 +7,7 @@
 		public string CreatedOn { get; set; } = null!;
 		public string GetInfo()
 		{
-			Name = Name.Replace(" ","-").ToLower().Trim();
+			Name = Name.Replace(" ","-").ToLower();
 			return Name;
 		}
 	}

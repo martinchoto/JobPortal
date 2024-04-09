@@ -10,8 +10,8 @@
 		public string CompanyName { get; set; } = null!;
 		public string GetInfo()
 		{
-			Name = Name.Replace(" ", "-").ToLower().Trim();
-			CompanyName = CompanyName.Replace(" ", "-").ToLower().Trim();
+			Name = Name.Replace(" ", "-").ToLower();
+			CompanyName = CompanyName.Replace(" ", "-").ToLower();
 			return $"{Name}-{CompanyName}";
 		}
 	}

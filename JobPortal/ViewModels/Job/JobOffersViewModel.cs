@@ -12,9 +12,9 @@
 		public string CompanyName { get; set; } = null!;
 		public string GetInformation()
 		{
-			Position = Position.Replace(" ", "-").ToLower().Trim();
-			CompanyName = CompanyName.Replace(" ", "-").ToLower().Trim();
-			Type = Type.Replace(" ", "-").ToLower().Trim();
+			Position = Position.Replace(" ", "-").ToLower();
+			CompanyName = CompanyName.Replace(" ", "-").ToLower();
+			Type = Type.Replace(" ", "-").ToLower();
 			return $"{CompanyName}-{Position}-{Type}";
 		}
 	}
