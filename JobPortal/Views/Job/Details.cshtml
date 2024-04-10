@@ -39,9 +39,8 @@
 					{
 						@foreach (var e in Model.Applications)
 						{
-							<a class="dropdown-item apply-link" 
-							asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id"
-							   asp-controller="Job" asp-action="Apply">@e.Name</a>
+							<a class="dropdown-item apply-link" asp-controller="Job" asp-action="Apply"
+							asp-route-applicationId="@e.Id" asp-route-jobId="@Model.Id">@e.Name</a>
 						}
 					}
 					else
@@ -77,22 +76,19 @@
 				e.preventDefault();
 
 				const href = $(this).attr('href');
-
 				const urlParams = new URLSearchParams(href.split('?')[1]);
 
 				const applicationId = urlParams.get('applicationId');
 				const jobId = urlParams.get('jobId');
 				console.log(applicationId);
 				console.log(jobId);
-
 				const hiddenText = $('#hidden-text');
-				
+				hiddenText.removeClass('d-none').show();
 				$.ajax({
 					url: '/Job/Apply',
-					type: 'POST',
+					type: 'GET',
 					data: { jobId: jobId, applicationId: applicationId },
 					success: function (response) {
-						hiddenText.removeClass('d-none').show();
 						if (response.alreadyApplied) {
 							hiddenText.text('You have already applied for this job with this application.');
 						} else {

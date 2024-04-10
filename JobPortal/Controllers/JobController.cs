@@ -6,6 +6,7 @@ using JobPortal.ViewModels.Company;
 using JobPortal.ViewModels.Job;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Configuration;
 using System.Security.Claims;
 
@@ -21,7 +22,7 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> All([FromQuery] AllJobsQueryViewModel query)
 		{
-			if (query.JobsPerPage != 3)
+			if (query.JobsPerPage < 3)
 			{
 				return RedirectToAction("All", "Job", new { jobsPerPage = 3, sorting = 0 });
 			}
@@ -48,6 +49,7 @@ namespace JobPortal.Controllers
 			JobDetailsViewModel jobViewModel = await _jobService.BuildDetailsViewModel(job, GetUserId());
 			return View(jobViewModel);
 		}
+		[HttpGet]
 		public async Task<JsonResult> Apply(int jobId, int applicationId)
 		{
 			if (await _jobService.AlreadyAppliedForAJobAsync(jobId, applicationId))

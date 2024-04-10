@@ -142,7 +142,8 @@ namespace JobPortal.Services.Job
 			{
 				jobsQuery = jobsQuery.Where(j =>
 						j.Position.ToLower().Contains(searchTerm.ToLower()) ||
-						j.Company.CompanyName.ToLower().Contains(searchTerm.ToLower()));
+						j.Company.CompanyName.ToLower().Contains(searchTerm.ToLower()) ||
+						j.Description.ToLower().Contains(searchTerm.ToLower()));
 			}
 
 			jobsQuery = sorting switch

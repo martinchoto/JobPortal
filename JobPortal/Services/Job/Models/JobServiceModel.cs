@@ -15,7 +15,7 @@
 			Position = Position.Replace(" ", "-").ToLower().Trim();
 			CompanyName = CompanyName.Replace(" ", "-").ToLower().Trim();
 			Type = Type.Replace(" ", "-").ToLower().Trim();
-			return $"{CompanyName}-{Position}-{Type}";
+			return $"{CompanyName}-{Position}-{Type}".TrimEnd();
 		}
 	}
 }

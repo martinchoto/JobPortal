@@ -95,7 +95,7 @@
 			<div class="card-body">
 				<partial name="_OffersPartial" for="@e" />
 				<a asp-controller="Job" asp-action="Details" asp-route-id="@e.Id"
-				   asp-route-info="@e.GetInformation() " class="btn btn-light mb-2 w-100 p-3 fw-bold">Details</a>
+				   asp-route-info="@e.GetInformation()" class="btn btn-light mb-2 w-100 p-3 fw-bold">Details</a>
 			</div>
 		</div>
 	}
