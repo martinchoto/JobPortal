@@ -16,23 +16,6 @@ namespace JobPortal.Services.Job
 		{
 			_context = context;
 		}
-		public async Task<List<JobOffersViewModel>> AllJobsAsync()
-		{
-			var jobs = await _context.JobOffers
-				.Select(x => new JobOffersViewModel
-				{
-					Id = x.Id,
-					Position = x.Position,
-					Status = x.Status,
-					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
-					VacationDays = x.VacationDays,
-					ImageUrl = x.Company.LogoUrl,
-					Type = x.Type.Name,
-					CompanyName = x.Company.CompanyName
-				})
-				.ToListAsync();
-			return jobs;
-		}
 
 		public Task<bool> AlreadyAppliedForAJobAsync(int jobId, int applicationId)
 		{

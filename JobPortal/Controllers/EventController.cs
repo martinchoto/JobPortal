@@ -16,10 +16,21 @@ namespace JobPortal.Controllers
 			_eventService = eventService;
 		}
 
-		public async Task<IActionResult> All()
+		public async Task<IActionResult> All([FromQuery] AllEventsQueryModel query)
 		{
-			List<AllEventsViewModel> viewModel = await _eventService.GetAllEventsAsync();
-			return View(viewModel);
+			if (query.EventsPerPage < 6)
+			{
+				return RedirectToAction("All", "Event", new { eventsPerPage = 6, sorting = 0 });
+			}
+			var queryResult = await _eventService.All(query.SearchTerm,
+				query.EventSorting,
+				query.CurrentPage,
+				query.EventsPerPage);
+
+			query.TotalEventsCount = queryResult.TotalEventsCount;
+			query.Events = queryResult.Events;
+
+			return View(query);
 		}
 		[Authorize(Roles = "Company")]
 		[HttpGet]

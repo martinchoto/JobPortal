@@ -8,6 +8,10 @@
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 	using System.Globalization;
+	using JobPortal.Services.Event.Models;
+	using JobPortal.Core.Enums;
+	using JobPortal.Core.Data.Enums;
+	using JobPortal.Services.Job.Models;
 
 	public class EventService : IEventService
 	{
@@ -28,6 +32,58 @@
 			};
 			await _context.Events.AddAsync(e);
 			await _context.SaveChangesAsync();
+		}
+
+		public async Task<EventQueryServiceModel> All(string searchTerm = null,
+			EventSorting sorting = EventSorting.Newest,
+			int currentPage = 1,
+			int eventsPerPage = 1)
+		{
+			var eventsQuery = _context.Events.AsQueryable();
+
+
+
+			if (!string.IsNullOrEmpty(searchTerm))
+			{
+				eventsQuery = eventsQuery.Where(e =>
+						e.Name.ToLower().Contains(searchTerm.ToLower()) ||
+						e.Company.CompanyName.ToLower().Contains(searchTerm.ToLower()) ||
+						e.Description.ToLower().Contains(searchTerm.ToLower()) ||
+						e.Company.Location.ToLower().Contains(searchTerm.ToLower()));
+			}
+			eventsQuery = sorting switch
+			{
+				EventSorting.Newest => eventsQuery
+					.OrderByDescending(j => j.Id),
+				EventSorting.Ascending => eventsQuery
+					.OrderBy(j => j.Date),
+				EventSorting.Descending => eventsQuery
+					.OrderByDescending(j => j.Date),
+				_ => eventsQuery.OrderBy(x => x.Id)
+			};
+
+			var skipAmount = (currentPage - 1) * eventsPerPage;
+			var events = await eventsQuery
+				.Skip(skipAmount)
+				.Take(eventsPerPage)
+				.Select(x => new EventServiceModel
+				{
+					Id = x.Id,
+					Name = x.Name,
+					CompanyName	= x.Company.CompanyName,
+					Date = x.Date.ToString( DataConstants.DATE_FORMAT ,CultureInfo.InvariantCulture),
+					ImageUrl = x.ImageUrl,
+					OwnerId = x.Company.UserId
+				})
+				.ToListAsync();
+
+			var totalEvents = eventsQuery.Count();
+
+			return new EventQueryServiceModel()
+			{
+				TotalEventsCount = totalEvents,
+				Events = events,
+			};
 		}
 
 		public async Task<bool> AlreadyJoinedEvent(string userId, int eventId)
@@ -105,6 +161,7 @@
 		{
 			return await _context.EventsParticipants
 				.Where(x => x.ParticipantId == userId)
+				.OrderBy(x => x.Event.Date)
 				.Select(e => new AllEventsViewModel
 				{
 					Id = e.EventId,
@@ -113,6 +170,7 @@
 					ImageUrl = e.Event.ImageUrl,
 					CompanyName = e.Event.Company.CompanyName
 				})
+
 				.ToListAsync();
 		}
 

@@ -87,7 +87,7 @@
 	<h2 class="text-center">No jobs found by the given criteria!</h2>
 }
 
-<div class="text-center row">
+<div class="text-center row mb-3">
 
 	@foreach (var e in Model.Jobs)
 	{
@@ -100,3 +100,4 @@
 		</div>
 	}
 </div>
+<h6>Page @Model.CurrentPage from @maxPage</h6>

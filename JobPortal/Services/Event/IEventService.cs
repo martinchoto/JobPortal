@@ -1,6 +1,9 @@
 ﻿namespace JobPortal.Services.Event
 {
+	using JobPortal.Core.Data.Enums;
 	using JobPortal.Core.Data.Models;
+	using JobPortal.Core.Enums;
+	using JobPortal.Services.Event.Models;
 	using JobPortal.ViewModels.Event;
 	using JobPortal.ViewModels.Job;
 	public interface IEventService
@@ -17,5 +20,7 @@
 		Task<List<AllEventsViewModel>> MyJoinedEvents(string userId);
 		Task RemoveEvent(Event e);
 		Task EditEventAsync(Event e, AddEventViewModel viewModel);
+		Task<EventQueryServiceModel> All(string searchTerm = null,
+			EventSorting sorting = EventSorting.Newest, int currentPage = 1, int jobsPerPage = 1);
 	}
 }
