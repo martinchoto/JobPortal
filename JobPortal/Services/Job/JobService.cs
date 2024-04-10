@@ -1,13 +1,15 @@
 ﻿using JobPortal.Core.Constants;
 using JobPortal.Core.Data;
 using JobPortal.Core.Data.Models;
+using JobPortal.Core.Enums;
+using JobPortal.Services.Job.Models;
 using JobPortal.ViewModels.Job;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace JobPortal.Services.Job
 {
-	public class JobService : IJobService
+    public class JobService : IJobService
 	{
 		private readonly JobPortalDbContext _context;
 		public JobService(JobPortalDbContext context)
@@ -104,21 +106,88 @@ namespace JobPortal.Services.Job
 				.ToListAsync();
 		}
 
-		public async Task<List<JobOffersViewModel>> GetCompanyOffers(int id)
+		public async Task<List<JobServiceModel>> GetCompanyOffers(int id)
 		{
 			return await _context.JobOffers
 				.Where(x => x.CompanyId == id)
-				.Select(x => new JobOffersViewModel
+				.Select(x => new JobServiceModel
 				{
 					Id = x.Id,
 					ImageUrl = x.Company.LogoUrl,
 					VacationDays = x.VacationDays,
 					Position = x.Position,
-					Salary = x.Salary.ToString(DataConstants.DECIMAL_FORMAT),
+					Salary = decimal.Parse(x.Salary.ToString(DataConstants.DECIMAL_FORMAT)),
 					Status = x.Status,
 					Type = x.Type.Name,
 					CompanyName = x.Company.CompanyName
 				})
+				.ToListAsync();
+		}
+
+		public async Task<JobQueryServiceModel> All(string type = null,
+			string searchTerm = null,
+			JobSorting sorting = JobSorting.Newest,
+			int currentPage = 1,
+			int jobsPerPage = 1)
+		{
+			var jobsQuery = _context.JobOffers.AsQueryable();
+
+			if (!string.IsNullOrEmpty(type))
+			{
+				jobsQuery = _context.JobOffers
+					.Where(j => j.Type.Name == type);
+			}
+
+			if (!string.IsNullOrEmpty(searchTerm))
+			{
+				jobsQuery = jobsQuery.Where(j =>
+						j.Position.ToLower().Contains(searchTerm.ToLower()) ||
+						j.Company.CompanyName.ToLower().Contains(searchTerm.ToLower()));
+			}
+
+			jobsQuery = sorting switch
+			{
+				JobSorting.Newest => jobsQuery
+					.OrderByDescending(j => j.Id),
+				JobSorting.Oldest => jobsQuery
+					.OrderBy(j => j.Id),
+				JobSorting.LowestSalary => jobsQuery
+					.OrderBy(j => j.Salary),
+				JobSorting.HighestSalary => jobsQuery
+					.OrderByDescending(j => j.Salary),
+					_ => jobsQuery.OrderBy(x => x.Id)
+			} ;
+
+			var skipAmount = (currentPage - 1) * jobsPerPage;
+			var jobs = await jobsQuery
+				.Skip(skipAmount)
+				.Take(jobsPerPage)
+				.Select(x => new JobServiceModel
+				{
+					Id = x.Id,
+					VacationDays = x.VacationDays,
+					Position = x.Position,
+					Salary = decimal.Parse(x.Salary.ToString(DataConstants.DECIMAL_FORMAT)),
+					ImageUrl = x.Company.LogoUrl,
+					CompanyName = x.Company.CompanyName,
+					Status = x.Status,
+					Type = x.Type.Name
+				})
+				.ToListAsync();
+
+			var totalJobs = jobsQuery.Count();
+
+			return new JobQueryServiceModel()
+			{
+				TotalJobsCount = totalJobs,
+				Jobs = jobs,
+			};
+		}
+
+		public async Task<List<string>> AllTypes()
+		{
+			return await _context.Types
+				.Select(x => x.Name)
 				.ToListAsync();
 		}
 	}

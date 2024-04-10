@@ -16,7 +16,11 @@
 						@if (User.Identity.IsAuthenticated)
 						{
 							<li class="nav-item">
-								<a class="nav-link" asp-controller="Job" asp-action="All" asp-area="">Job Offers</a>
+								<a class="nav-link" asp-controller="Job" 
+								asp-action="All"
+								asp-route-JobsPerPage="3"
+								asp-route-JobSorting="0"
+								asp-area="">Job Offers</a>
 							</li>
 							@if (User.IsInRole("Company"))
 							{

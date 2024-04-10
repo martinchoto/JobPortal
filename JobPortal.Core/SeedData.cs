@@ -8,7 +8,7 @@ using Type = JobPortal.Core.Data.Models.Type;
 
 namespace JobPortal.Core
 {
-	public class SeedData
+	internal class SeedData
 	{
 		internal IEnumerable<Company> SeedCompanies()
 		{

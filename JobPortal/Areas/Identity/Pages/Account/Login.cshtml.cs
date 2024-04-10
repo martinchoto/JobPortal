@@ -56,7 +56,7 @@ namespace JobPortal.Areas.Identity.Pages.Account
 			}
 			if (User.Identity.IsAuthenticated && User.Identity != null)
 			{
-				return RedirectToAction("All", "Jobs");
+				return RedirectToAction("Index", "Home");
 			}
 			returnUrl ??= Url.Content("~/");
 

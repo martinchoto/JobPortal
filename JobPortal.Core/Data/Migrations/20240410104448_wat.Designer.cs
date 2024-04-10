@@ -4,6 +4,7 @@ using JobPortal.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Job_Portal.Data.Migrations
 {
     [DbContext(typeof(JobPortalDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240410104448_wat")]
+    partial class wat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,7 +209,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
 
                     b.HasData(
                         new
@@ -270,7 +272,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
 
                     b.HasData(
                         new
@@ -341,7 +343,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("ParticipantId");
 
-                    b.ToTable("EventsParticipants", (string)null);
+                    b.ToTable("EventsParticipants");
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.JobApplication", b =>
@@ -386,7 +388,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Applications", (string)null);
+                    b.ToTable("Applications");
 
                     b.HasData(
                         new
@@ -461,7 +463,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("JobOffers", (string)null);
+                    b.ToTable("JobOffers");
 
                     b.HasData(
                         new
@@ -595,7 +597,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("JobOffersApplications", (string)null);
+                    b.ToTable("JobOffersApplications");
                 });
 
             modelBuilder.Entity("JobPortal.Core.Data.Models.Type", b =>
@@ -613,7 +615,7 @@ namespace Job_Portal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Types", (string)null);
+                    b.ToTable("Types");
 
                     b.HasData(
                         new
