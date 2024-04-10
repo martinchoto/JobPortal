@@ -1,7 +1,7 @@
 ﻿using JobPortal.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 
 namespace JobPortal.Controllers
 {
