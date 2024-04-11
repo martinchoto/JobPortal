@@ -8,6 +8,6 @@ namespace JobPortal.Services.Admin.Models
 		public string UserName { get; set; } = null!;
 		public string Email { get; set; } = null!;
 		public DateTime CreatedOn { get; set; }
-		public string Role { get; set; } = null!;
+		public string? Role { get; set; }
 	}
 }

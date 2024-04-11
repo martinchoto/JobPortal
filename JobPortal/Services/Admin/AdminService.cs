@@ -36,7 +36,7 @@ namespace JobPortal.Services.Admin
 
 			if (user == null)
 			{
-				return null; 
+				return null;
 			}
 			var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -52,11 +52,20 @@ namespace JobPortal.Services.Admin
 			AdminSorting sorting = AdminSorting.Newest,
 			int currentPage = 1, int usersPerPage = 1)
 		{
-			var usersQuery = _userManager.Users.AsQueryable();
+			var usersQuery = _userManager.Users.AsEnumerable();
 
+			//Тайна е как проработи тва
 			if (!string.IsNullOrEmpty(role))
-			{
-				
+			{	
+				List<AppUser> usersWithRoles = new List<AppUser>();
+				foreach (var user in usersQuery)
+				{
+					if (await _userManager.IsInRoleAsync(user, role))
+					{
+						usersWithRoles.Add(user);
+					}
+					usersQuery = usersWithRoles.AsEnumerable();
+				}
 			}
 
 			if (!string.IsNullOrEmpty(searchTerm))
@@ -77,7 +86,7 @@ namespace JobPortal.Services.Admin
 
 			var skipAmount = (currentPage - 1) * usersPerPage;
 
-			var users = await usersQuery
+			var users = usersQuery
 				.Skip(skipAmount)
 				.Take(usersPerPage)
 				.Select(x => new UserServiceModel
@@ -86,8 +95,8 @@ namespace JobPortal.Services.Admin
 					UserName = x.UserName,
 					Email = x.Email,
 					CreatedOn = x.CreatedOn,
-				})
-				.ToListAsync();
+				}).ToList();
+
 
 			foreach (var user in users)
 			{
