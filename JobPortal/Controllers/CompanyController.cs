@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace JobPortal.Controllers
 {
-	[Authorize(Roles = "Company")]
+	[Authorize(Roles = "Company,Admin")]
 	public class CompanyController : Controller
 	{
 		private readonly ICompanyService _companyService;
@@ -55,11 +55,11 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> Edit(int id)
 		{
 			JobOffer edited = await _companyService.GetOffer(id);
-			if (edited == null || !User.IsInRole("Company"))
+			if (edited == null)
 			{
 				return BadRequest();
 			}
-			if (edited.Company.UserId != GetUserId())
+			if (edited.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
@@ -70,11 +70,11 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> Edit(AddJobOfferViewModel viewModel, int id)
 		{
 			JobOffer edited = await _companyService.GetOffer(id);
-			if (edited == null || !User.IsInRole("Company"))
+			if (edited == null)
 			{
 				return BadRequest();
 			}
-			if (edited.Company.UserId != GetUserId())
+			if (edited.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
@@ -84,17 +84,20 @@ namespace JobPortal.Controllers
                 return View(viewModel);
             }
             await _companyService.EditJobOfferAsync(viewModel, id);
-
+			if (User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Details", "Job", new {id = id});
+			}
 			return RedirectToAction(nameof(All), "Company");
 		}
 		public async Task<IActionResult> Delete(int id)
 		{
 			JobOffer offer = await _companyService.GetOffer(id);
-			if (offer == null || !User.IsInRole("Company"))
+			if (offer == null)
 			{
 				return BadRequest();
 			}
-			if (offer.Company.UserId != GetUserId())
+			if (offer.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
@@ -110,15 +113,19 @@ namespace JobPortal.Controllers
 		public async Task<IActionResult> ConfirmDelete(int id)
 		{
 			JobOffer offer = await _companyService.GetOffer(id);
-			if (offer == null || !User.IsInRole("Company"))
+			if (offer == null)
 			{
 				return BadRequest();
 			}
-			if (offer.Company.UserId != GetUserId())
+			if (offer.Company.UserId != GetUserId() && !User.IsInRole("Admin"))
 			{
 				return Unauthorized();
 			}
 			await _companyService.DeleteJobOffer(offer);
+			if (User.IsInRole("Admin"))
+			{
+				return RedirectToAction("All", "Job");
+			}
 			return RedirectToAction(nameof(All), "Company");
 		}
 		public async Task<IActionResult> Applicants(int id)

@@ -30,7 +30,7 @@ namespace JobPortal.Services.Admin
 		{
 			return await _roleManager.Roles.Select(x => x.Name).ToListAsync();
 		}
-		public async Task<string> GetRole(string id)
+		private async Task<string> GetRole(string id)
 		{
 			var user = await _userManager.FindByIdAsync(id);
 
