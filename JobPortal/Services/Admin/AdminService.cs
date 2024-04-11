@@ -3,6 +3,7 @@ using JobPortal.Core.Constants;
 using JobPortal.Core.Data;
 using JobPortal.Core.Data.Enums;
 using JobPortal.Core.Data.Identity;
+
 using JobPortal.Core.Enums;
 using JobPortal.Services.Admin.Models;
 using JobPortal.Services.Job.Models;
@@ -12,6 +13,7 @@ using System;
 
 namespace JobPortal.Services.Admin
 {
+	using JobPortal.Core.Data.Models;
 	public class AdminService : IAdminService
 	{
 		private readonly JobPortalDbContext _context;
@@ -56,7 +58,7 @@ namespace JobPortal.Services.Admin
 
 			//Тайна е как проработи тва
 			if (!string.IsNullOrEmpty(role))
-			{	
+			{
 				List<AppUser> usersWithRoles = new List<AppUser>();
 				foreach (var user in usersQuery)
 				{
@@ -110,6 +112,35 @@ namespace JobPortal.Services.Admin
 				Users = users,
 				TotalUsersCount = totalUsers
 			};
+		}
+
+		public async Task<AppUser> FindUserById(string id)
+		{
+			return await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+		}
+
+		public async Task<Company> FindCompanyByUserId(string id)
+		{
+			return await _context.Companies.FirstOrDefaultAsync(c => c.UserId == id);
+		}
+
+		public async Task DeleteCompany(Company company)
+		{
+			_context.Companies.Remove(company);
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task<bool> DeleteUser(AppUser user)
+		{
+			var result = await _userManager.DeleteAsync(user);
+			if (result.Succeeded)
+				return true;
+			return false;
+		}
+
+		public async Task<bool> HasRole(AppUser user, string role)
+		{
+			return await _userManager.IsInRoleAsync(user, role);
 		}
 	}
 }

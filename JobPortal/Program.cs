@@ -1,4 +1,4 @@
-using JobPortal.Extensions;
+using JobPortal.Extensions.ServiceCollections;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -13,18 +13,10 @@ namespace JobPortal.Controllers
     [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly JobPortalDbContext _dbContext;
         private readonly IAdminService _adminService;
 
-        public AdminController(UserManager<AppUser> userManager, 
-            RoleManager<IdentityRole> roleManager,
-            JobPortalDbContext dbContext, IAdminService adminService)
+        public AdminController(IAdminService adminService)
         {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _dbContext = dbContext;
             _adminService = adminService;
         }
 
@@ -49,8 +41,8 @@ namespace JobPortal.Controllers
 		}
         public async Task<IActionResult> DeleteUser(string id)
         {
-            AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            AppUser user = await _adminService.FindUserById(id);
+            if (await _adminService.HasRole(user, "Admin"))
             {
                 return Unauthorized();
             }
@@ -63,13 +55,12 @@ namespace JobPortal.Controllers
                 user.Applications.Clear();
                 user.EventParticipants.Clear();
             }
-            Company associatedCompany = await _dbContext.Companies.FirstOrDefaultAsync(c => c.UserId == id);
+            Company associatedCompany = await _adminService.FindCompanyByUserId(user.Id);
             if (associatedCompany != null)
             {
-                _dbContext.Companies.Remove(associatedCompany);
-                await _dbContext.SaveChangesAsync(); 
+                await _adminService.DeleteCompany(associatedCompany);
             }
-            var result = await _userManager.DeleteAsync(user);
+            await _adminService.DeleteUser(user);
             return RedirectToAction(nameof(Users), "Admin");
         }
     }
