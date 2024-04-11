@@ -1,4 +1,5 @@
-﻿@model AddEventViewModel
+﻿@using System.Globalization
+@model AddEventViewModel
 @{
 	ViewData["Title"] = "Add event";
 }
@@ -21,8 +22,8 @@
 			</div>
 			<div class="mb-3">
 				<label asp-for="@Model.Date" class="mb-3">Start Date</label>
-				<input asp-for="@Model.Date" class="form-control" aria-required="true" value="@DateTime.Now" type="datetime-local" />
-				<span asp-validation-for="@Model.Date" class="text-danger"></span>
+				<input asp-for="@Model.Date" class="form-control" aria-required="true" value="@DateTime.Now.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)" type="datetime-local" />
+				<span asp-validation-for="@Model.Date" class="text-danger">@TempData["Error"]</span>
 			</div>
 			<div class="mb-3">
 				<label asp-for="@Model.Description" class="mb-3">Description</label>

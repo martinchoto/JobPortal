@@ -1,6 +1,6 @@
 ﻿@model AddEventViewModel
 @{
-	ViewData["Title"] = "Add event";
+	ViewData["Title"] = "Edit event";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
@@ -22,7 +22,11 @@
 			<div class="mb-3">
 				<label asp-for="@Model.Date" class="mb-3">Start Date</label>
 				<input asp-for="@Model.Date" class="form-control" aria-required="true" type="datetime-local" />
-				<span asp-validation-for="@Model.Date" class="text-danger"></span>
+				@if (TempData["Error"] != null)
+				{
+					<span asp-validation-for="@Model.Date" class="text-danger">@TempData["Error"]</span>
+				}
+				
 			</div>
 			<div class="mb-3">
 				<label asp-for="@Model.Description" class="mb-3">Description</label>

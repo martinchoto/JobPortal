@@ -71,7 +71,7 @@
 					Id = x.Id,
 					Name = x.Name,
 					CompanyName	= x.Company.CompanyName,
-					Date = x.Date.ToString( DataConstants.DATE_FORMAT ,CultureInfo.InvariantCulture),
+					Date = x.Date.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
 					ImageUrl = x.ImageUrl,
 					OwnerId = x.Company.UserId
 				})

@@ -3,6 +3,7 @@ using JobPortal.Services.Event;
 using JobPortal.ViewModels.Event;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
 namespace JobPortal.Controllers
@@ -48,6 +49,11 @@ namespace JobPortal.Controllers
 			if (company == null)
 			{
 				return BadRequest();
+			}
+			if (viewModel.Date < DateTime.Now)
+			{
+				ModelState.AddModelError(string.Empty, "Date cannot be earlier than today!");
+				TempData["Error"] = "Date cannot be earlier than today!";
 			}
 			if (!ModelState.IsValid)
 			{
@@ -138,7 +144,7 @@ namespace JobPortal.Controllers
 			return View(editViewModel);
 
 		}
-		[Authorize(Roles = "Company,Admin")]
+		[Authorize(Roles = "Company")]
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, AddEventViewModel viewModel)
 		{
@@ -151,10 +157,16 @@ namespace JobPortal.Controllers
 			{
 				return Unauthorized();
 			}
+			if (viewModel.Date < DateTime.Now)
+			{
+				ModelState.AddModelError(string.Empty, "Date cannot be earlier than today!");
+				TempData["Error"] = "Date cannot be earlier than today!";
+			}
 			if (!ModelState.IsValid)
 			{
 				return View(viewModel);
 			}
+			
 			await _eventService.EditEventAsync(e, viewModel);
 			return RedirectToAction(nameof(All), "Event");
 		}
