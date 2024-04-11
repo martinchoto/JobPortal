@@ -1,67 +1,15 @@
 ﻿using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using NuGet.Packaging;
-using System.ComponentModel.Design;
-using System.Security.Cryptography.X509Certificates;
 using Type = JobPortal.Core.Data.Models.Type;
 
 namespace JobPortal.Core
 {
 	internal class SeedData
 	{
-		internal IEnumerable<Company> SeedCompanies()
-		{
-			var company = new Company()
-			{
-				Id = 1,
-				UserId = "b5b0f315-98eb-4078-bf80-a329869ad392",
-				Address = "ul. Aleksander Stamboliiski",
-				Location = "Pazardjik",
-				CompanyName = "Billa",
-				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png"
-			};
-
-			var secondCompany = new Company()
-			{
-				Id = 2,
-				UserId = "ba20f920-1a04-4d5b-8a7f-f0b0a328169d",
-				Address = "ul. Iordan Iosifov",
-				Location = "Sofia",
-				CompanyName = "Lidl",
-				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Lidl-Logo.svg/150px-Lidl-Logo.svg.png"
-
-			};
-			var thirdCompany = new Company()
-			{
-				Id = 3,
-				UserId = "ca27630c-7fa9-4d54-b8f1-851252abc519",
-				Address = "bul. Tsarigradsko Shose",
-				Location = "Sofia",
-				CompanyName = "Bosch",
-				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bosch-logo.svg/1920px-Bosch-logo.svg.png"
-			};
-
-			var companies = new Company[] { company, secondCompany, thirdCompany };
-
-			return companies;
-		}
-		internal IEnumerable<Type> SeedTypes()
-		{
-			Type[] types = new Type[] {
-			new Type(){ Id = 1,Name = "Technical"},
-			 new Type(){ Id = 2, Name = "Business"},
-			 new Type(){ Id = 3, Name = "Healthcare"},
-			 new Type(){  Id = 4, Name= "Creative"},
-			 new Type(){ Id = 5, Name = "Education"},
-			 new Type() {Id = 6, Name = "Customer Service"}
-			};
-			return types;
-		}
-		internal IEnumerable<AppUser> SeedUsers()
+		internal AppUser[] SeedUsers()
 		{
 			var hasher = new PasswordHasher<AppUser>();
-
 			var adminUser = new AppUser()
 			{
 				Id = "11d42cfa-0eb5-4556-bbee-452d66efacf8",
@@ -74,7 +22,6 @@ namespace JobPortal.Core
 				CreatedOn = DateTime.Now
 			};
 			adminUser.PasswordHash = hasher.HashPassword(adminUser, "admin");
-
 
 			var companyLidl = new AppUser()
 			{
@@ -99,7 +46,6 @@ namespace JobPortal.Core
 			};
 			companyBosch.PasswordHash = hasher.HashPassword(companyBosch, "asdasd");
 
-
 			var applicant = new AppUser()
 			{
 				Id = "018bff8a-5df3-40d8-8a65-e6a5e932f957",
@@ -112,10 +58,125 @@ namespace JobPortal.Core
 				CreatedOn = DateTime.Now
 			};
 			applicant.PasswordHash = hasher.HashPassword(applicant, "asdasd");
-			var users = new AppUser[] { adminUser, companyLidl, companyBosch, applicant };
+
+			var companyBilla = new AppUser()
+			{
+				Id = "d79e6d15-bed9-45f6-8d00-6a506474f385",
+				UserName = "billabg",
+				NormalizedUserName = "BILLABG",
+				Email = "billabg@abv.bg",
+				NormalizedEmail = "BILLABG@ABV.BG",
+				CreatedOn = DateTime.Now
+			};
+			companyBilla.PasswordHash = hasher.HashPassword(companyBilla, "asdasd");
+
+			var users = new AppUser[] { adminUser, companyLidl, companyBosch, applicant, companyBilla };
 			return users;
 		}
-		internal IEnumerable<Event> SeedEvent()
+		internal IdentityRole[] SeedRoles()
+		{
+			var adminRole = new IdentityRole("Admin");
+			adminRole.Id = "f770a115-fc1f-4951-bd22-e4a9421e6160";
+			adminRole.NormalizedName = adminRole.Name.ToUpper();
+
+			var companyRole = new IdentityRole("Company");
+			companyRole.NormalizedName = companyRole.Name.ToUpper();
+			companyRole.Id = "9c91b32e-802c-4a53-bdcd-05876a361ac8";
+
+			var applicantRole = new IdentityRole("Applicant");
+			applicantRole.NormalizedName = applicantRole.Name.ToUpper();
+			applicantRole.Id = "7b282415-4ca5-4752-b0fb-04b62bf6c13c";
+			
+			var roles = new IdentityRole[] { adminRole, companyRole, applicantRole };
+
+			return roles;
+		}
+		internal IEnumerable<IdentityUserRole<string>> SeedUserRoles()
+		{
+			var roles = SeedRoles();
+			var users = SeedUsers();
+
+			var userRoles = new List<IdentityUserRole<string>>();
+
+			userRoles.Add(new IdentityUserRole<string>()
+			{
+				RoleId = roles[0].Id,
+				UserId = users[0].Id,
+			});
+			userRoles.Add(new IdentityUserRole<string>()
+			{
+				RoleId = roles[1].Id,
+				UserId = users[1].Id,
+			});
+			userRoles.Add(new IdentityUserRole<string>()
+			{
+				RoleId = roles[1].Id,
+				UserId = users[2].Id,
+			});
+			userRoles.Add(new IdentityUserRole<string>()
+			{
+				RoleId = roles[2].Id,
+				UserId = users[3].Id,
+			});
+			userRoles.Add(new IdentityUserRole<string>()
+			{
+				RoleId = roles[1].Id,
+				UserId = users[4].Id,
+			});
+			return userRoles;
+		}
+		internal Company[] SeedCompanies()
+		{
+
+			var users = SeedUsers();
+			var company = new Company()
+			{
+				Id = 1,
+				UserId = users[4].Id,
+				Address = "ul. Aleksander Stamboliiski",
+				Location = "Pazardjik",
+				CompanyName = "Billa",
+				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Billa-Logo.svg/2560px-Billa-Logo.svg.png"
+			};
+
+			var secondCompany = new Company()
+			{
+				Id = 2,
+				UserId = users[1].Id,
+				Address = "ul. Iordan Iosifov",
+				Location = "Sofia",
+				CompanyName = "Lidl",
+				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Lidl-Logo.svg/150px-Lidl-Logo.svg.png"
+
+			};
+			var thirdCompany = new Company()
+			{
+				Id = 3,
+				UserId = users[2].Id,
+				Address = "bul. Tsarigradsko Shose",
+				Location = "Sofia",
+				CompanyName = "Bosch",
+				LogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bosch-logo.svg/1920px-Bosch-logo.svg.png"
+			};
+
+			var companies = new Company[] { company, secondCompany, thirdCompany };
+
+			return companies;
+		}
+		internal Type[] SeedTypes()
+		{
+			Type[] types = new Type[] {
+			new Type(){ Id = 1,Name = "Technical"},
+			 new Type(){ Id = 2, Name = "Business"},
+			 new Type(){ Id = 3, Name = "Healthcare"},
+			 new Type(){  Id = 4, Name= "Creative"},
+			 new Type(){ Id = 5, Name = "Education"},
+			 new Type() {Id = 6, Name = "Customer Service"}
+			};
+			return types;
+		}
+
+		internal Event[] SeedEvent()
 		{
 			Event event1 = new Event()
 			{
@@ -175,7 +236,7 @@ namespace JobPortal.Core
 			Event[] events = new Event[] { event1, event2, event3, event4, event5, event6 };
 			return events;
 		}
-		internal IEnumerable<JobApplication> SeedApplications()
+		internal JobApplication[] SeedApplications()
 		{
 			JobApplication jobApplication1 = new JobApplication()
 			{
@@ -203,9 +264,9 @@ namespace JobPortal.Core
 
 			JobApplication[] applications = new JobApplication[] { jobApplication1, jobApplication2 };
 			return applications;
-			
+
 		}
-		internal IEnumerable<JobOffer> SeedOffers()
+		internal JobOffer[] SeedOffers()
 		{
 			JobOffer offer1 = new JobOffer()
 			{

@@ -1,4 +1,5 @@
-﻿using JobPortal.Core.Data;
+﻿using JobPortal.Core;
+using JobPortal.Core.Data;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Services.Admin;
 using JobPortal.Services.Application;
@@ -39,13 +40,14 @@ namespace JobPortal.Extensions.ServiceCollections
                     options.Password.RequireUppercase = false;
                 })
                     .AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<JobPortalDbContext>();
+                    .AddEntityFrameworkStores<JobPortalDbContext>()
+                    .AddDefaultTokenProviders();
 
             return services;
         }
         public static IServiceCollection AddBussinessServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<ICompanyService, CompanyService>();
+			services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IEventService, EventService>();

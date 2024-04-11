@@ -1,5 +1,4 @@
-﻿using Job_Portal.Data.Migrations;
-using JobPortal.Core;
+﻿using JobPortal.Core;
 using JobPortal.Core.Data.Identity;
 using JobPortal.Core.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -12,12 +11,12 @@ namespace JobPortal.Core.Data
 	public class JobPortalDbContext : IdentityDbContext<AppUser>
 	{
 		private readonly SeedData seedData;
-
 		public JobPortalDbContext(DbContextOptions<JobPortalDbContext> options)
 			: base(options)
 		{
 			seedData = new SeedData();
 		}
+
 		public DbSet<Company> Companies { get; set; } = null!;
 		public DbSet<JobOffer> JobOffers { get; set; } = null!;
 		public DbSet<Type> Types { get; set; } = null!;
@@ -70,10 +69,14 @@ namespace JobPortal.Core.Data
 		}
 		private void SeedData(ModelBuilder builder)
 		{
-			builder.Entity<Type>()
-				.HasData(seedData.SeedTypes());
 			builder.Entity<AppUser>()
 				.HasData(seedData.SeedUsers());
+			builder.Entity<IdentityRole>()
+				.HasData(seedData.SeedRoles());
+			builder.Entity<IdentityUserRole<string>>()
+				.HasData(seedData.SeedUserRoles());
+			builder.Entity<Type>()
+				.HasData(seedData.SeedTypes());
 			builder.Entity<Company>()
 				.HasData(seedData.SeedCompanies());
 			builder.Entity<Event>()
