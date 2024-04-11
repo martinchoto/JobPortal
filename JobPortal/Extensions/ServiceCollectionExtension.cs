@@ -1,5 +1,6 @@
 ﻿using JobPortal.Core.Data;
 using JobPortal.Core.Data.Identity;
+using JobPortal.Services.Admin;
 using JobPortal.Services.Application;
 using JobPortal.Services.Company;
 using JobPortal.Services.Event;
@@ -48,6 +49,7 @@ namespace JobPortal.Extensions
 			services.AddScoped<IJobService, JobService>();
 			services.AddScoped<IApplicationService, ApplicationService>();
 			services.AddScoped<IEventService, EventService>();
+			services.AddScoped<IAdminService, AdminService>();
 			return services;
 		}
 	}

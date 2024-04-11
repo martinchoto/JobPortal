@@ -144,7 +144,7 @@ namespace JobPortal.Controllers
 			return View(editViewModel);
 
 		}
-		[Authorize(Roles = "Company")]
+		[Authorize(Roles = "Company,Admin")]
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, AddEventViewModel viewModel)
 		{

@@ -24,7 +24,7 @@ namespace JobPortal.Controllers
 		{
 			if (query.JobsPerPage < 3)
 			{
-				return RedirectToAction("All", "Job", new { jobsPerPage = 3, sorting = 0 });
+				return RedirectToAction("All", "Job", new { jobsPerPage = 3});
 			}
 			var queryResult = await _jobService.All(
 				query.Type,

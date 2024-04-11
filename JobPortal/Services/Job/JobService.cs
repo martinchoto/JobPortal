@@ -118,7 +118,7 @@ namespace JobPortal.Services.Job
 			if (!string.IsNullOrEmpty(type))
 			{
 				jobsQuery = _context.JobOffers
-					.Where(j => j.Type.Name == type);
+					.Where(j => j.Type.Name.ToLower() == type.ToLower());
 			}
 
 			if (!string.IsNullOrEmpty(searchTerm))
