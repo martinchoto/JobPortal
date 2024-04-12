@@ -13,7 +13,7 @@ namespace JobPortal.Core.Data
 		private readonly SeedData seedData;
 		public JobPortalDbContext(DbContextOptions<JobPortalDbContext> options)
 			: base(options)
-		{
+		{ 
 			seedData = new SeedData();
 		}
 

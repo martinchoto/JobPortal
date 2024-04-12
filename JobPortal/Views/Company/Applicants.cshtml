@@ -21,7 +21,8 @@
 				<a asp-controller="Application" asp-route-id="@e.Id" asp-route-info="@e.GetInfo()"
 				asp-action="Details" class="btn btn-info mb-2 w-25">Details</a>
 				<br />
-				<a asp-controller="Company" asp-route-id="@e.Id" asp-action="DeleteApplication" class="btn btn-danger mb-2 w-25">Delete</a>
+				<a asp-controller="Company" asp-route-applicationId="@e.Id" 
+				asp-route-jobId="@e.JobId" asp-action="DeleteApplication" class="btn btn-danger mb-2 w-25">Delete</a>
 			</div>
 			<hr class="text-dark" />
 		</div>

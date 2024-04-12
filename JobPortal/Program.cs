@@ -24,14 +24,15 @@ if (app.Environment.IsDevelopment())
 {
 	app.UseMigrationsEndPoint();
 }
-else
-{
-	app.UseExceptionHandler("/Error");
-	app.UseHsts();
-}
+
+
+app.UseExceptionHandler("/Home/Error/500");
+app.UseStatusCodePagesWithRedirects("/Home/Error?statuscode={0}");
+app.UseHsts();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 

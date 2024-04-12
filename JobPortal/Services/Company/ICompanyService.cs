@@ -19,7 +19,7 @@ namespace JobPortal.Services.Company
 		Task DeleteJobOffer(JobOffer jobOffer);
 		Task<Company> CompanyAsync(string companyId);
 		Task<List<MyJobApplicationViewModel>> GetAllApplicationsForJobOffers(int id);
-		Task<JobOfferApplication> GetApplicationById(int id);
+		Task<JobOfferApplication> GetJobOfferApplication(int applicationId, int jobId);
 		Task DeleteApplication(JobOfferApplication jobOfferApplication);
 		Task<DetailsApplicationViewModel> DetailsBuildViewModel(JobOfferApplication jobApplication);
 	}

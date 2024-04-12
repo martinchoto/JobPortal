@@ -66,7 +66,7 @@ namespace JobPortal.Services.Company
 		}
 		public async Task<JobOffer> GetOffer(int id)
 		{
-			return await _context.JobOffers.FindAsync(id);
+			return await _context.JobOffers.FirstOrDefaultAsync(x => x.Id == id);
 		}
 		public async Task<AddJobOfferViewModel> BuildEditViewModel(int id)
 		{
@@ -123,6 +123,7 @@ namespace JobPortal.Services.Company
 				{
 					Id = x.ApplicationId,
 					Name = x.Application.Name,
+					JobId = x.JobOfferId,
 					CreatedOn = x.Application.CreatedOn.ToString(DataConstants.DATE_FORMAT, 
 					CultureInfo.InvariantCulture),
 				})
@@ -130,9 +131,11 @@ namespace JobPortal.Services.Company
 
 			return allJobs;
 		}
-		public async Task<JobOfferApplication> GetApplicationById(int id)
+		public async Task<JobOfferApplication> GetJobOfferApplication(int applicationId, int jobId)
 		{
-			return await _context.JobOffersApplications.FirstOrDefaultAsync(x => x.ApplicationId == id);
+			return await _context.JobOffersApplications.FirstOrDefaultAsync(x => 
+			x.ApplicationId == applicationId &&
+			x.JobOfferId == jobId);
 		}
 
 		public async Task DeleteApplication(JobOfferApplication jobOfferApplication)

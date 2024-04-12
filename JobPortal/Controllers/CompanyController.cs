@@ -130,15 +130,28 @@ namespace JobPortal.Controllers
 		}
 		public async Task<IActionResult> Applicants(int id)
 		{
-			List<MyJobApplicationViewModel> model = await _companyService.GetAllApplicationsForJobOffers(id);
+			JobOffer jobOffer = await _companyService.GetOffer(id);
+			if (jobOffer == null)
+			{
+				return BadRequest();
+			}
+			if (jobOffer.Company.UserId != GetUserId())
+			{
+				return Unauthorized();
+			}
+			List<MyJobApplicationViewModel> model = await _companyService.GetAllApplicationsForJobOffers(jobOffer.Id);
 			return View(model);
 		}
-		public async Task<IActionResult> DeleteApplication(int id)
+		public async Task<IActionResult> DeleteApplication(int applicationId, int jobId)
 		{
-			JobOfferApplication toBeDeleted = await _companyService.GetApplicationById(id);
+			JobOfferApplication toBeDeleted = await _companyService.GetJobOfferApplication(applicationId, jobId);
 			if (toBeDeleted == null)
 			{
 				return BadRequest();
+			}
+			if (toBeDeleted.JobOffer.Company.UserId != GetUserId())
+			{
+				return Unauthorized();
 			}
 			await _companyService.DeleteApplication(toBeDeleted);
 			return RedirectToAction("All", "Company");

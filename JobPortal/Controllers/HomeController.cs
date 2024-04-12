@@ -20,5 +20,16 @@ namespace JobPortal.Controllers
 			}
 			return View();
 		}
+		public async Task<IActionResult> Error(int statusCode)
+		{
+			switch (statusCode)
+			{
+				case 400: return View("Error400");
+				case 401: return View("Error401");
+				case 404: return View("Error404");
+			}
+
+			return View("Error");
+		}
 	}
 }
