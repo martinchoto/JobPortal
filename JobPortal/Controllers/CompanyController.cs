@@ -154,7 +154,7 @@ namespace JobPortal.Controllers
 				return Unauthorized();
 			}
 			await _companyService.DeleteApplication(toBeDeleted);
-			return RedirectToAction("All", "Company");
+			return RedirectToAction(nameof(All), "Company");
 		}
 		private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 	}
