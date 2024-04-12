@@ -105,7 +105,7 @@ else
 				<td>@user.CreatedOn.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture)</td>
 				<td>@user.Role</td>
 				<td>
-					<a asp-route-id="@user.Id" asp-action="DeleteUser"
+						<a asp-route-id="@user.Id" onclick="return confirmDelete(`@user.UserName`)" asp-action="DeleteUser"
 					   class="btn btn-danger p-3 fw-bold">Ban</a>
 				</td>
 			</tr>
@@ -113,4 +113,17 @@ else
 	</tbody>
 </table>
 <h6>Page @Model.CurrentPage from @maxPage</h6>
+}
+@section Scripts{
+	<script>
+		function confirmDelete(userName) {
+			const confirmation = confirm(`Do you seriously want to delete user ${userName}?`);
+			if (confirmation) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	</script>
 }
