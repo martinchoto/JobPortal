@@ -11,10 +11,21 @@ namespace JobPortal.Core.Data
 	public class JobPortalDbContext : IdentityDbContext<AppUser>
 	{
 		private readonly SeedData seedData;
-		public JobPortalDbContext(DbContextOptions<JobPortalDbContext> options)
+		private bool _seedDb;
+		public JobPortalDbContext(DbContextOptions<JobPortalDbContext> options, bool seedDb = true)
 			: base(options)
-		{ 
+		{
+
+			if (Database.IsRelational())
+			{
+				Database.Migrate();
+			}
+			else
+			{
+				Database.EnsureCreated();
+			}
 			seedData = new SeedData();
+			_seedDb = seedDb;
 		}
 
 		public DbSet<Company> Companies { get; set; } = null!;
@@ -69,22 +80,26 @@ namespace JobPortal.Core.Data
 		}
 		private void SeedData(ModelBuilder builder)
 		{
-			builder.Entity<AppUser>()
-				.HasData(seedData.SeedUsers());
-			builder.Entity<IdentityRole>()
-				.HasData(seedData.SeedRoles());
-			builder.Entity<IdentityUserRole<string>>()
-				.HasData(seedData.SeedUserRoles());
-			builder.Entity<Type>()
-				.HasData(seedData.SeedTypes());
-			builder.Entity<Company>()
-				.HasData(seedData.SeedCompanies());
-			builder.Entity<Event>()
-				.HasData(seedData.SeedEvent());
-			builder.Entity<JobApplication>()
-				.HasData(seedData.SeedApplications());
-			builder.Entity<JobOffer>()
-				.HasData(seedData.SeedOffers());
+			if (_seedDb)
+			{
+				builder.Entity<AppUser>()
+								.HasData(seedData.SeedUsers());
+				builder.Entity<IdentityRole>()
+					.HasData(seedData.SeedRoles());
+				builder.Entity<IdentityUserRole<string>>()
+					.HasData(seedData.SeedUserRoles());
+				builder.Entity<Type>()
+					.HasData(seedData.SeedTypes());
+				builder.Entity<Company>()
+					.HasData(seedData.SeedCompanies());
+				builder.Entity<Event>()
+					.HasData(seedData.SeedEvent());
+				builder.Entity<JobApplication>()
+					.HasData(seedData.SeedApplications());
+				builder.Entity<JobOffer>()
+					.HasData(seedData.SeedOffers());
+			}
+
 		}
 	}
 }

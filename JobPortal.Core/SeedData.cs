@@ -5,9 +5,9 @@ using Type = JobPortal.Core.Data.Models.Type;
 
 namespace JobPortal.Core
 {
-	internal class SeedData
+	public class SeedData
 	{
-		internal AppUser[] SeedUsers()
+		public AppUser[] SeedUsers()
 		{
 			var hasher = new PasswordHasher<AppUser>();
 			var adminUser = new AppUser()
@@ -73,7 +73,7 @@ namespace JobPortal.Core
 			var users = new AppUser[] { adminUser, companyLidl, companyBosch, applicant, companyBilla };
 			return users;
 		}
-		internal IdentityRole[] SeedRoles()
+		public IdentityRole[] SeedRoles()
 		{
 			var adminRole = new IdentityRole("Admin");
 			adminRole.Id = "f770a115-fc1f-4951-bd22-e4a9421e6160";
@@ -86,12 +86,12 @@ namespace JobPortal.Core
 			var applicantRole = new IdentityRole("Applicant");
 			applicantRole.NormalizedName = applicantRole.Name.ToUpper();
 			applicantRole.Id = "7b282415-4ca5-4752-b0fb-04b62bf6c13c";
-			
+
 			var roles = new IdentityRole[] { adminRole, companyRole, applicantRole };
 
 			return roles;
 		}
-		internal IEnumerable<IdentityUserRole<string>> SeedUserRoles()
+		public List<IdentityUserRole<string>> SeedUserRoles()
 		{
 			var roles = SeedRoles();
 			var users = SeedUsers();
@@ -125,7 +125,7 @@ namespace JobPortal.Core
 			});
 			return userRoles;
 		}
-		internal Company[] SeedCompanies()
+		public Company[] SeedCompanies()
 		{
 
 			var users = SeedUsers();
@@ -163,7 +163,7 @@ namespace JobPortal.Core
 
 			return companies;
 		}
-		internal Type[] SeedTypes()
+		public Type[] SeedTypes()
 		{
 			Type[] types = new Type[] {
 			new Type(){ Id = 1,Name = "Technical"},
@@ -176,7 +176,7 @@ namespace JobPortal.Core
 			return types;
 		}
 
-		internal Event[] SeedEvent()
+		public Event[] SeedEvent()
 		{
 			Event event1 = new Event()
 			{
@@ -236,7 +236,7 @@ namespace JobPortal.Core
 			Event[] events = new Event[] { event1, event2, event3, event4, event5, event6 };
 			return events;
 		}
-		internal JobApplication[] SeedApplications()
+		public JobApplication[] SeedApplications()
 		{
 			JobApplication jobApplication1 = new JobApplication()
 			{
@@ -266,7 +266,7 @@ namespace JobPortal.Core
 			return applications;
 
 		}
-		internal JobOffer[] SeedOffers()
+		public JobOffer[] SeedOffers()
 		{
 			JobOffer offer1 = new JobOffer()
 			{
