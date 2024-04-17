@@ -110,7 +110,7 @@ namespace JobPortal.Services.Company
 			_context.JobOffers.Remove(jobOffer);
 			await _context.SaveChangesAsync();
 		}
-		public async Task<Company> CompanyAsync(string companyId)
+		public async Task<Company> FindCompanyByUserId(string companyId)
 		{
 			return await _context.Companies.FirstOrDefaultAsync(x => x.UserId == companyId);
 		}

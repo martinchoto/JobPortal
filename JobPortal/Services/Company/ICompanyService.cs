@@ -17,7 +17,7 @@ namespace JobPortal.Services.Company
 		Task<AddJobOfferViewModel> BuildEditViewModel(int id);
 		Task EditJobOfferAsync(AddJobOfferViewModel viewModel, int id);
 		Task DeleteJobOffer(JobOffer jobOffer);
-		Task<Company> CompanyAsync(string companyId);
+		Task<Company> FindCompanyByUserId(string companyId);
 		Task<List<MyJobApplicationViewModel>> GetAllApplicationsForJobOffers(int id);
 		Task<JobOfferApplication> GetJobOfferApplication(int applicationId, int jobId);
 		Task DeleteApplication(JobOfferApplication jobOfferApplication);

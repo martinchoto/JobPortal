@@ -38,7 +38,7 @@ namespace JobPortal.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(AddJobOfferViewModel viewModel)
 		{
-			Company company = await _companyService.CompanyAsync(GetUserId());
+			Company company = await _companyService.FindCompanyByUserId(GetUserId());
 			if (company == null)
 			{
 				return BadRequest();
