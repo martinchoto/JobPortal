@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobPortal.Tests.UnitTests.AdminServiceTests
+namespace JobPortal.Tests.UnitTests
 {
-	[TestFixture]
-	public class AdminServiceTests : UnitTestsBase
-	{
-		[Test]
-		public async Task GetAllRolesByName()
-		{
-		}
-	}
+    [TestFixture]
+    public class AdminServiceTests : UnitTestsBase
+    {
+        [Test]
+        public async Task GetAllRolesByName()
+        {
+        }
+    }
 }

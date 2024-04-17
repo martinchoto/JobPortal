@@ -10,7 +10,6 @@
 	{
 		Task<Company> FindCompanyByUserIdAsync(string userId);
 		Task AddEventAsync(int companyId, AddEventViewModel viewModel);
-		Task<List<AllEventsViewModel>> GetAllEventsAsync();
 		Task<EventDetailsViewModel> GetEventDetailsAsync(Event e);
 		Task<Event> GetEventAsync(int id);
 		Task JoinEvent(EventParticipants eventParticipants);

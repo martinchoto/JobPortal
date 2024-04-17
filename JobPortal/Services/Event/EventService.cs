@@ -105,21 +105,6 @@
 			return await _context.Companies.FirstOrDefaultAsync(c => c.UserId == userId);
 		}
 
-		public async Task<List<AllEventsViewModel>> GetAllEventsAsync()
-		{
-			return await _context.Events
-				.Select(e => new AllEventsViewModel
-				{
-					Id = e.Id,
-					Name = e.Name,
-					Date = e.Date.ToString(DataConstants.DATE_FORMAT, CultureInfo.InvariantCulture),
-					ImageUrl = e.ImageUrl,
-					OwnerId = e.Company.UserId,
-					CompanyName = e.Company.CompanyName
-				})
-				.ToListAsync();
-		}
-
 		public async Task<Event> GetEventAsync(int eventId)
 		{
 			return await _context.Events.FindAsync(eventId);
